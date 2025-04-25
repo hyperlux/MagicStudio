@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Magic Studio - Web Design Freelancer</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
+  <style>
+    body {
+      font-family: 'Montserrat', sans-serif;
+      background: linear-gradient(135deg, #4C6EF5 0%, #FFD43B 50%, #FF8783 100%);
+      background-attachment: fixed;
+      background-size: cover;
+    }
+    .smooth-scroll { scroll-behavior: smooth; }
+    h1, h2, h3 { text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5); }
+  </style>
+</head>
+<body class="text-light-gray smooth-scroll">
+  <!-- Header with Language Toggle -->
+  <header class="bg-dark-secondary bg-opacity-90 text-white py-20 text-center relative">
+    <div class="absolute top-4 right-4">
+      <button id="lang-toggle" class="flex items-center space-x-2 text-sm text-white bg-purple px-3 py-1 rounded hover:bg-purple-600">
+        <img src="https://flagcdn.com/24x18/fr.png" alt="French Flag" class="w-6 h-4">
+        <span id="lang-text">Français</span>
+      </button>
+    </div>
+    <h1 class="text-4xl md:text-6xl font-bold mb-4 text-white" data-key="hero-title">Magic Studio</h1>
+    <p class="text-lg md:text-xl mb-6" data-key="hero-subtitle">Crafting Enchanted Digital Experiences</p>
+    <a href="#contact" class="bg-teal text-white py-3 px-6 rounded-full hover:bg-teal-600 transition" data-key="hero-cta">Get in Touch</a>
+  </header>
+
+  <!-- About Section -->
+  <section id="about" class="py-16 px-4 md:px-20 bg-dark-secondary bg-opacity-90">
+    <h2 class="text-3xl font-bold text-center mb-8 text-white" data-key="about-title">About Magic Studio</h2>
+    <p class="text-lg max-w-2xl mx-auto text-center" data-key="about-text">
+      I'm a passionate freelance web designer dedicated to creating stunning, user-friendly websites that bring your vision to life. With expertise in modern design tools and technologies, I craft digital experiences that are both beautiful and functional.
+    </p>
+  </section>
+
+  <!-- Services Section -->
+  <section id="services" class="py-16 px-4 md:px-20 bg-dark-secondary bg-opacity-90">
+    <h2 class="text-3xl font-bold text-center mb-8 text-white" data-key="services-title">Services</h2>
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-5xl mx-auto">
+      <div class="text-center">
+        <h3 class="text-xl font-bold mb-2 text-white" data-key="services-web-title">Web Design</h3>
+        <p class="text-light-gray" data-key="services-web-text">Custom, visually appealing designs tailored to your brand.</p>
+      </div>
+      <div class="text-center">
+        <h3 class="text-xl font-bold mb-2 text-white" data-key="services-uiux-title">UI/UX Design</h3>
+        <p class="text-light-gray" data-key="services-uiux-text">User-focused interfaces for seamless experiences.</p>
+      </div>
+      <div class="text-center">
+        <h3 class="text-xl font-bold mb-2 text-white" data-key="services-responsive-title">Responsive Design</h3>
+        <p class="text-light-gray" data-key="services-responsive-text">Websites that look great on any device.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Portfolio Section -->
+  <section id="portfolio" class="py-16 px-4 md:px-20 bg-dark-gray bg-opacity-90">
+    <h2 class="text-3xl font-bold text-center mb-8 text-white" data-key="portfolio-title">Portfolio</h2>
+    <div class="grid grid-cols-1 gap-8 max-w-5xl mx-auto">
+      <!-- Project 1 (Carrera Rallye) -->
+      <div class="bg-dark-secondary bg-opacity-90 rounded-lg shadow-lg overflow-hidden max-w-md mx-auto">
+        <img src="https://screenshot.guru/api/screenshot?url=https://carrerarallye.com" alt="Carrera Rallye" class="w-full h-48 object-cover">
+        <div class="p-4">
+          <h3 class="text-xl font-bold text-white" data-key="portfolio-project1-title">Carrera Rallye</h3>
+          <p class="text-light-gray" data-key="portfolio-project1-text">A dynamic website for Carrera Rallye, showcasing high-energy rally events with a sleek, modern design.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Contact Section -->
+  <section id="contact" class="py-16 px-4 md:px-20 bg-dark-secondary bg-opacity-90 text-white">
+    <h2 class="text-3xl font-bold text-center mb-8" data-key="contact-title">Let's Work Together</h2>
+    <div class="max-w-lg mx-auto">
+      <div class="mb-4">
+        <label for="name" class="block text-sm font-medium mb-1 text-light-gray" data-key="contact-name-label">Name</label>
+        <input type="text" id="name" class="w-full p-3 rounded bg-input-bg text-light-gray border border-gray-400" placeholder="Your Name" data-key="contact-name-placeholder">
+      </div>
+      <div class="mb-4">
+        <label for="email" class="block text-sm font-medium mb-1 text-light-gray" data-key="contact-email-label">Email</label>
+        <input type="email" id="email" class="w-full p-3 rounded bg-input-bg text-light-gray border border-gray-400" placeholder="Your Email" data-key="contact-email-placeholder">
+      </div>
+      <div class="mb-4">
+        <label for="message" class="block text-sm font-medium mb-1 text-light-gray" data-key="contact-message-label">Message</label>
+        <textarea id="message" class="w-full p-3 rounded bg-input-bg text-light-gray border border-gray-400" rows="5" placeholder="Your Message" data-key="contact-message-placeholder"></textarea>
+      </div>
+      <button id="contact-btn" class="bg-teal text-white py-3 px-6 rounded-full hover:bg-teal-600 transition w-full" data-key="contact-btn">Send Message</button>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="bg-dark-gray bg-opacity-90 text-white py-6 text-center">
+    <p data-key="footer-copyright">© 2025 Magic Studio. All rights reserved.</p>
+    <div class="mt-2">
+      <a href="#" class="text-teal mx-2 hover:underline">LinkedIn</a>
+      <a href="#" class="text-teal mx-2 hover:underline">Behance</a>
+      <a href="#" class="text-teal mx-2 hover:underline">Dribbble</a>
+    </div>
+  </footer>
+
+  <!-- JavaScript -->
+  <script>
+    // Custom Tailwind colors
+    document.documentElement.style.setProperty('--dark-gray', '#1F1F1F');
+    document.documentElement.style.setProperty('--dark-secondary', '#2D2D2D');
+    document.documentElement.style.setProperty('--light-gray', '#E2E8F0');
+    document.documentElement.style.setProperty('--white', '#F7FAFC');
+    document.documentElement.style.setProperty('--purple', '#805AD5');
+    document.documentElement.style.setProperty('--teal', '#4FD1C5');
+    document.documentElement.style.setProperty('--input-bg', '#4A5568');
+    document.documentElement.style.setProperty('--gray-400', '#A0AEC0');
+
+    // Language translations
+    const translations = {
+      en: {
+        'lang-text': 'Français',
+        'hero-title': 'Magic Studio',
+        'hero-subtitle': 'Crafting Enchanted Digital Experiences',
+        'hero-cta': 'Get in Touch',
+        'about-title': 'About Magic Studio',
+        'about-text': "I'm a passionate freelance web designer dedicated to creating stunning, user-friendly websites that bring your vision to life. With expertise in modern design tools and technologies, I craft digital experiences that are both beautiful and functional.",
+        'portfolio-title': 'Portfolio',
+        'portfolio-project1-title': 'Carrera Rallye',
+        'portfolio-project1-text': 'A dynamic website for Carrera Rallye, showcasing high-energy rally events with a sleek, modern design.',
+        'services-title': 'Services',
+        'services-web-title': 'Web Design',
+        'services-web-text': 'Custom, visually appealing designs tailored to your brand.',
+        'services-uiux-title': 'UI/UX Design',
+        'services-uiux-text': 'User-focused interfaces for seamless experiences.',
+        'services-responsive-title': 'Responsive Design',
+        'services-responsive-text': 'Websites that look great on any device.',
+        'contact-title': "Let's Work Together",
+        'contact-name-label': 'Name',
+        'contact-name-placeholder': 'Your Name',
+        'contact-email-label': 'Email',
+        'contact-email-placeholder': 'Your Email',
+        'contact-message-label': 'Message',
+        'contact-message-placeholder': 'Your Message',
+        'contact-btn': 'Send Message',
+        'footer-copyright': '© 2025 Magic Studio. All rights reserved.'
+      },
+      fr: {
+        'lang-text': 'English',
+        'hero-title': 'Magic Studio',
+        'hero-subtitle': 'Créer des Expériences Numériques Enchantées',
+        'hero-cta': 'Contactez-moi',
+        'about-title': 'À Propos de Magic Studio',
+        'about-text': "Je suis un designer web freelance passionné, dédié à la création de sites web époustouflants et conviviaux qui donnent vie à votre vision. Avec une expertise dans les outils et technologies de design modernes, je conçois des expériences numériques à la fois belles et fonctionnelles.",
+        'portfolio-title': 'Portfolio',
+        'portfolio-project1-title': 'Carrera Rallye',
+        'portfolio-project1-text': 'Un site web dynamique pour Carrera Rallye, mettant en avant des événements de rallye énergiques avec un design moderne et élégant.',
+        'services-title': 'Services',
+        'services-web-title': 'Design Web',
+        'services-web-text': 'Designs personnalisés et visuellement attrayants adaptés à votre marque.',
+        'services-uiux-title': 'Design UI/UX',
+        'services-uiux-text': 'Interfaces centrées sur l’utilisateur pour des expériences fluides.',
+        'services-responsive-title': 'Design Réactif',
+        'services-responsive-text': 'Sites web qui s’affichent parfaitement sur tous les appareils.',
+        'contact-title': 'Travaillons Ensemble',
+        'contact-name-label': 'Nom',
+        'contact-name-placeholder': 'Votre Nom',
+        'contact-email-label': 'Email',
+        'contact-email-placeholder': 'Votre Email',
+        'contact-message-label': 'Message',
+        'contact-message-placeholder': 'Votre Message',
+        'contact-btn': 'Envoyer le Message',
+        'footer-copyright': '© 2025 Magic Studio. Tous droits réservés.'
+      }
+    };
+
+    // Current language
+    let currentLang = 'en';
+
+    // Function to update text based on language
+    function updateLanguage(lang) {
+      document.querySelectorAll('[data-key]').forEach(element => {
+        const key = element.getAttribute('data-key');
+        if (translations[lang][key]) {
+          if (element.tagName === 'INPUT' || element.tagName === 'TEXTAREA') {
+            element.placeholder = translations[lang][key];
+          } else {
+            element.textContent = translations[lang][key];
+          }
+        }
+      });
+      document.documentElement.lang = lang;
+    }
+
+    // Language toggle
+    document.getElementById('lang-toggle').addEventListener('click', () => {
+      currentLang = currentLang === 'en' ? 'fr' : 'en';
+      updateLanguage(currentLang);
+      document.getElementById('lang-text').textContent = translations[currentLang]['lang-text'];
+      document.getElementById('lang-toggle').querySelector('img').src = currentLang === 'en' ? 'https://flagcdn.com/24x18/fr.png' : 'https://flagcdn.com/24x18/gb.png';
+      document.getElementById('lang-toggle').querySelector('img').alt = currentLang === 'en' ? 'French Flag' : 'English Flag';
+    });
+
+    // Smooth scrolling for nav links
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+      anchor.addEventListener('click', function(e) {
+        e.preventDefault();
+        document.querySelector(this.getAttribute('href')).scrollIntoView({
+          behavior: 'smooth'
+        });
+      });
+    });
+
+    // Contact form submission (placeholder)
+    document.getElementById('contact-btn').addEventListener('click', () => {
+      const name = document.getElementById('name').value;
+      const email = document.getElementById('email').value;
+      const message = document.getElementById('message').value;
+      if (name && email && message) {
+        alert(currentLang === 'en' ? 'Thank you for your message! I’ll get back to you soon.' : 'Merci pour votre message ! Je vous répondrai bientôt.');
+        document.getElementById('name').value = '';
+        document.getElementById('email').value = '';
+        document.getElementById('message').value = '';
+      } else {
+        alert(currentLang === 'en' ? 'Please fill out all fields.' : 'Veuillez remplir tous les champs.');
+      }
+    });
+
+    // Initialize language
+    updateLanguage(currentLang);
+  </script>
+</body>
+</html>
