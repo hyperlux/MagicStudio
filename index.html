@@ -5,12 +5,12 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Magic Studio - Creative Web Design</title>
   <script src="https://cdn.tailwindcss.com"></script>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700;900&family=Playfair+Display:wght@400;700;900&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;700;900&display=swap" rel="stylesheet">
   <style>
     body {
-      font-family: 'Playfair Display', serif;
-      background: #000000; /* Black theme */
-      color: #FFFFFF; /* All text white */
+      font-family: 'Inter', sans-serif;
+      background: #000000;
+      color: #FFFFFF;
       scroll-behavior: smooth;
       overflow-x: hidden;
       margin: 0;
@@ -22,15 +22,15 @@
       width: 100%;
       height: 100%;
       z-index: -1;
-      background: #000000; /* Black canvas */
-      opacity: 0.6; /* Slightly increased for visibility */
+      background: #000000;
+      opacity: 0.6;
     }
     .header {
       position: fixed;
       top: 0;
       left: 0;
       width: 100%;
-      background: rgba(0, 0, 0, 0.8); /* Black with transparency */
+      background: rgba(0, 0, 0, 0.8);
       backdrop-filter: blur(10px);
       z-index: 1000;
       padding: 1rem 0;
@@ -43,20 +43,15 @@
       align-items: center;
       padding: 0 1.5rem;
     }
-    .header .logo {
-      font-size: 1.5rem;
-      font-weight: 900;
-      color: #FFFFFF; /* White logo */
-    }
     .header nav a {
       margin-left: 1.5rem;
-      color: #FFFFFF; /* White nav links */
+      color: #FFFFFF;
       text-decoration: none;
       font-weight: 400;
       transition: color 0.3s;
     }
     .header nav a:hover {
-      color: #D8B4FE; /* Lighter purple on hover */
+      color: #D8B4FE;
     }
     .language-switcher select {
       background: #2D2D2D;
@@ -84,7 +79,7 @@
     .hero h1 {
       font-size: 4rem;
       font-weight: 900;
-      background: linear-gradient(45deg, #FFFFFF, #FFFFFF); /* White gradient */
+      background: linear-gradient(45deg, #FFFFFF, #FFFFFF);
       -webkit-background-clip: text;
       background-clip: text;
       color: transparent;
@@ -92,27 +87,25 @@
     }
     .hero p {
       font-size: 1.25rem;
-      color: #FFFFFF; /* White subtitle */
+      color: #FFFFFF;
       margin: 1rem 0;
       max-width: 600px;
       animation: fadeInUp 1.2s ease-out;
     }
     .hero a {
-      background: #A855F7; /* Purple button */
-      color: #FFFFFF; /* White button text */
+      background: #A855F7;
+      color: #FFFFFF;
       padding: 0.75rem 2rem;
       border-radius: 9999px;
       font-weight: 700;
       text-decoration: none;
       transition: transform 0.3s, box-shadow 0.3s;
       animation: fadeInUp 1.4s ease-out;
-    }
-    .hero a {
-      margin-top: 2rem; /* Added to lower the button */
+      margin-top: 2rem;
     }
     .hero a:hover {
       transform: translateY(-3px);
-      box-shadow: 0 4px 12px rgba(216, 180, 254, 0.5); /* Lighter purple shadow */
+      box-shadow: 0 4px 12px rgba(216, 180, 254, 0.5);
     }
     section {
       padding: 6rem 1.5rem;
@@ -126,23 +119,97 @@
       font-weight: 900;
       text-align: center;
       margin-bottom: 3rem;
-      color: #FFFFFF; /* White headings */
+      color: #FFFFFF;
       animation: fadeInUp 1s ease-out;
     }
-    /* About Section */
+    /* Updated About Section */
     #about .content {
-      background: rgba(30, 30, 30, 0.8); /* Dark gray with transparency */
-      border-radius: 1rem;
-      padding: 2rem;
-      max-width: 800px;
+      background: rgba(30, 30, 30, 0.4);
+      backdrop-filter: blur(12px);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 1.5rem;
+      padding: 3rem;
+      max-width: 900px;
       margin: 0 auto;
-      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
-      animation: fadeInUp 1.2s ease-out;
+      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+      animation: scaleIn 1s ease-out;
+      position: relative;
+      overflow: hidden;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      display: flex;
+      flex-direction: column;
+      gap: 2rem;
     }
-    #about p {
-      font-size: 1.125rem;
+    #about .content:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 12px 40px rgba(168, 85, 247, 0.3);
+    }
+    #about .content::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 4px;
+      background: linear-gradient(90deg, #A855F7, #D8B4FE);
+    }
+    #about .content .section {
+      opacity: 0;
+      animation: fadeInSection 0.8s ease-out forwards;
+    }
+    #about .content .section:nth-child(1) {
+      animation-delay: 0.2s;
+    }
+    #about .content .section:nth-child(2) {
+      animation-delay: 0.4s;
+    }
+    #about .content .section:nth-child(3) {
+      animation-delay: 0.6s;
+    }
+    #about .content .section:not(:last-child)::after {
+      content: '';
+      display: block;
+      width: 50px;
+      height: 1px;
+      background: linear-gradient(90deg, #A855F7, #D8B4FE);
+      margin: 1.5rem auto;
+      opacity: 0.5;
+    }
+    #about .content h3 {
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: #FFFFFF;
+      margin-bottom: 0.5rem;
+      text-align: center;
+    }
+    #about .content p {
+      font-size: 1.1rem;
       line-height: 1.8;
-      color: #FFFFFF; /* White text */
+      color: #D1D5DB;
+      letter-spacing: 0.02em;
+      font-weight: 300;
+      margin: 0;
+      text-align: center;
+    }
+    #about .highlight {
+      background: linear-gradient(90deg, #A855F7, #D8B4FE);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+      font-weight: 700;
+    }
+    @media (max-width: 768px) {
+      #about .content {
+        padding: 2rem;
+        max-width: 100%;
+      }
+      #about .content h3 {
+        font-size: 1.3rem;
+      }
+      #about .content p {
+        font-size: 1rem;
+        line-height: 1.7;
+      }
     }
     /* Portfolio Section */
     .portfolio-grid {
@@ -150,7 +217,7 @@
       grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
       gap: 2rem;
       justify-content: center;
-      max-width: 400px; /* Center single card */
+      max-width: 400px;
       margin: 0 auto;
     }
     .portfolio-card {
@@ -158,7 +225,7 @@
       overflow: hidden;
       border-radius: 1rem;
       transition: transform 0.3s ease, box-shadow 0.3s ease;
-      background: rgba(30, 30, 30, 0.8); /* Dark gray card background */
+      background: rgba(30, 30, 30, 0.8);
       box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
       animation: fadeInUp 1s ease-out;
     }
@@ -178,7 +245,7 @@
       left: 0;
       width: 100%;
       height: 100%;
-      background: rgba(0, 0, 0, 0.6); /* Lighter black overlay */
+      background: rgba(0, 0, 0, 0.6);
       opacity: 0;
       display: flex;
       flex-direction: column;
@@ -193,27 +260,27 @@
     .portfolio-card h3 {
       font-size: 1.5rem;
       font-weight: 700;
-      color: #FFFFFF; /* White title */
+      color: #FFFFFF;
       margin-bottom: 0.5rem;
     }
     .portfolio-card p {
       font-size: 1rem;
-      color: #FFFFFF; /* White description */
+      color: #FFFFFF;
       text-align: center;
       margin-bottom: 1rem;
     }
     .portfolio-card a {
-      color: #FFFFFF; /* White link */
+      color: #FFFFFF;
       text-decoration: underline;
       font-size: 1rem;
       transition: color 0.3s;
     }
     .portfolio-card a:hover {
-      color: #D8B4FE; /* Lighter purple on hover */
+      color: #D8B4FE;
     }
     /* Contact Section */
     #contact .contact-form {
-      background: rgba(30, 30, 30, 0.8); /* Dark gray form background */
+      background: rgba(30, 30, 30, 0.8);
       border-radius: 1rem;
       padding: 2rem;
       max-width: 600px;
@@ -222,9 +289,9 @@
       animation: fadeInUp 1.2s ease-out;
     }
     .contact-form input, .contact-form textarea {
-      background: #2D2D2D; /* Lighter input background */
+      background: #2D2D2D;
       border: 1px solid #475569;
-      color: #FFFFFF; /* White input text */
+      color: #FFFFFF;
       padding: 0.75rem;
       border-radius: 0.5rem;
       width: 100%;
@@ -232,16 +299,16 @@
       transition: border-color 0.3s, box-shadow 0.3s;
     }
     .contact-form input::placeholder, .contact-form textarea::placeholder {
-      color: #B0B0B0; /* Light gray placeholder */
+      color: #B0B0B0;
     }
     .contact-form input:focus, .contact-form textarea:focus {
-      border-color: #D8B4FE; /* Lighter purple border */
+      border-color: #D8B4FE;
       box-shadow: 0 0 8px rgba(216, 180, 254, 0.5);
       outline: none;
     }
     .contact-form button {
-      background: #A855F7; /* Purple button */
-      color: #FFFFFF; /* White button text */
+      background: #A855F7;
+      color: #FFFFFF;
       padding: 0.75rem 2rem;
       border-radius: 9999px;
       font-weight: 700;
@@ -251,15 +318,15 @@
     .contact-form button:hover {
       transform: translateY(-3px);
       box-shadow: 0 8px 20px rgba(216, 180, 254, 0.5);
-      background: #D8B4FE; /* Lighter purple on hover */
+      background: #D8B4FE;
       animation: pulse 1.5s infinite;
     }
     /* Footer */
     footer {
-      background: #1E1E1E; /* Dark gray footer */
+      background: #1E1E1E;
       padding: 3rem 1.5rem;
       text-align: center;
-      color: #FFFFFF; /* White footer text */
+      color: #FFFFFF;
       position: relative;
       z-index: 10;
       border-top: 1px solid rgba(255, 255, 255, 0.1);
@@ -269,16 +336,24 @@
       margin-bottom: 1rem;
     }
     footer a {
-      color: #FFFFFF; /* White footer links */
+      color: #FFFFFF;
       margin: 0 1rem;
       text-decoration: none;
       transition: color 0.3s;
     }
     footer a:hover {
-      color: #D8B4FE; /* Lighter purple on hover */
+      color: #D8B4FE;
     }
     @keyframes fadeInUp {
       from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    @keyframes scaleIn {
+      from { opacity: 0; transform: scale(0.95); }
+      to { opacity: 1; transform: scale(1); }
+    }
+    @keyframes fadeInSection {
+      from { opacity: 0; transform: translateY(10px); }
       to { opacity: 1; transform: translateY(0); }
     }
     @keyframes pulse {
@@ -289,10 +364,7 @@
   </style>
 </head>
 <body>
-  <!-- Canvas for Black-Themed Twinkling Stars with Enhanced Mouse-Interactive Shape-Forming Connections and Shooting Stars -->
   <canvas id="canvas"></canvas>
-
-  <!-- Header -->
   <header class="header">
     <div class="container">
       <div class="flex items-center">
@@ -310,31 +382,41 @@
       </div>
     </div>
   </header>
-
-  <!-- Hero Section -->
   <section class="hero">
     <img src="logo5.png" alt="Magic Studio Logo" class="h-64">
     <h1>Magic Studio</h1>
     <p data-i18n="hero-subtitle">Crafting bold, creative, and seamless digital experiences.</p>
     <a href="#contact" data-i18n="hero-button">Start Your Project</a>
   </section>
-
-  <!-- About Section -->
+  <!-- Updated About Section -->
   <section id="about">
     <h2 data-i18n="section-about">About</h2>
     <div class="content">
-      <p data-i18n="about-content">
-        I'm a freelance web designer with a passion for creating visually stunning and highly functional websites. My focus is on delivering tailored solutions that elevate your brand and engage your audience.
-      </p>
+      <div class="section">
+        <h3 data-i18n="about-why-title">Why We Create</h3>
+        <p data-i18n="about-why">
+          At Magic Studio, the belief is simple: exceptional design has the power to <span class="highlight">transform</span> brands and inspire audiences. Every project begins with a vision to redefine what’s possible in the digital world.
+        </p>
+      </div>
+      <div class="section">
+        <h3 data-i18n="about-how-title">How We Innovate</h3>
+        <p data-i18n="about-how">
+          By blending <span class="highlight">cutting-edge design</span> with meticulous attention to detail, Magic Studio crafts experiences that are as functional as they are beautiful. A client-first approach ensures every solution is tailored to perfection.
+        </p>
+      </div>
+      <div class="section">
+        <h3 data-i18n="about-what-title">What We Deliver</h3>
+        <p data-i18n="about-what">
+          The result? Stunning, <span class="highlight">high-performance websites</span> that elevate brands and captivate users. Magic Studio turns ideas into digital realities that stand out and drive success.
+        </p>
+      </div>
     </div>
   </section>
-
-  <!-- Portfolio Section -->
   <section id="portfolio">
     <h2 data-i18n="section-portfolio">Portfolio</h2>
     <div class="portfolio-grid">
       <div class="portfolio-card">
-        <img src="https://screenshot.guru/api/screenshot?url=https://carrerarallye.com" alt="Carrera Rallye">
+        <img src="rallye.png" alt="Carrera Rallye">
         <div class="overlay">
           <h3>Carrera Rallye</h3>
           <p data-i18n="portfolio-carrera">A vibrant, modern website for high-energy rally events.</p>
@@ -343,8 +425,6 @@
       </div>
     </div>
   </section>
-
-  <!-- Contact Section -->
   <section id="contact">
     <h2 data-i18n="section-contact">Contact</h2>
     <div class="contact-form">
@@ -354,20 +434,13 @@
       <button id="contact-btn" data-i18n="contact-button">Send Message</button>
     </div>
   </section>
-
-  <!-- Footer -->
   <footer>
     <p data-i18n="footer-copyright">© 2025 Magic Studio. All rights reserved.</p>
     <div>
-      <a href="#" data-i18n="footer-linkedin">LinkedIn</a>
-      <a href="#" data-i18n="footer-behance">Behance</a>
-      <a href="#" data-i18n="footer-dribbble">Dribbble</a>
+      <p>Contact: magicstudiospace@gmail.com</p>
     </div>
   </footer>
-
-  <!-- JavaScript -->
   <script>
-    // Translation object
     const translations = {
       en: {
         'nav-about': 'About',
@@ -376,7 +449,12 @@
         'hero-subtitle': 'Crafting bold, creative, and seamless digital experiences.',
         'hero-button': 'Start Your Project',
         'section-about': 'About',
-        'about-content': "I'm a freelance web designer with a passion for creating visually stunning and highly functional websites. My focus is on delivering tailored solutions that elevate your brand and engage your audience.",
+        'about-why-title': 'Why We Create',
+        'about-why': "At Magic Studio, the belief is simple: exceptional design has the power to transform brands and inspire audiences. Every project begins with a vision to redefine what’s possible in the digital world.",
+        'about-how-title': 'How We Innovate',
+        'about-how': "By blending cutting-edge design with meticulous attention to detail, Magic Studio crafts experiences that are as functional as they are beautiful. A client-first approach ensures every solution is tailored to perfection.",
+        'about-what-title': 'What We Deliver',
+        'about-what': "The result? Stunning, high-performance websites that elevate brands and captivate users. Magic Studio turns ideas into digital realities that stand out and drive success.",
         'section-portfolio': 'Portfolio',
         'portfolio-carrera': 'A vibrant, modern website for high-energy rally events.',
         'portfolio-link': 'Visit Website',
@@ -386,10 +464,7 @@
         'contact-message': 'Your Message',
         'contact-button': 'Send Message',
         'footer-copyright': '© 2025 Magic Studio. All rights reserved.',
-        'footer-linkedin': 'LinkedIn',
-        'footer-behance': 'Behance',
-        'footer-dribbble': 'Dribbble',
-        'alert-success': 'Thank you for your message! I’ll get back to you soon.',
+        'alert-success': 'Thank you for your message! We’ll get back to you soon.',
         'alert-error': 'Please fill out all fields.'
       },
       fr: {
@@ -399,7 +474,12 @@
         'hero-subtitle': 'Créer des expériences numériques audacieuses, créatives et fluides.',
         'hero-button': 'Démarrer votre projet',
         'section-about': 'À propos',
-        'about-content': "Je suis un designer web indépendant passionné par la création de sites web visuellement époustouflants et hautement fonctionnels. Mon objectif est de fournir des solutions sur mesure qui valorisent votre marque et captivent votre audience.",
+        'about-why-title': 'Pourquoi nous créons',
+        'about-why': "Chez Magic Studio, la conviction est simple : un design exceptionnel a le pouvoir de transformer les marques et d'inspirer les audiences. Chaque projet commence par une vision visant à redéfinir ce qui est possible dans le monde numérique.",
+        'about-how-title': 'Comment nous innovons',
+        'about-how': "En combinant un design de pointe avec une attention méticuleuse aux détails, Magic Studio crée des expériences aussi fonctionnelles qu'esthétiques. Une approche centrée sur le client garantit que chaque solution est parfaitement adaptée.",
+        'about-what-title': 'Ce que nous livrons',
+        'about-what': "Le résultat ? Des sites web époustouflants et performants qui élèvent les marques et captivent les utilisateurs. Magic Studio transforme les idées en réalités numériques qui se démarquent et génèrent du succès.",
         'section-portfolio': 'Portfolio',
         'portfolio-carrera': 'Un site web moderne et vibrant pour des événements de rallye dynamiques.',
         'portfolio-link': 'Visiter le site',
@@ -409,15 +489,10 @@
         'contact-message': 'Votre message',
         'contact-button': 'Envoyer le message',
         'footer-copyright': '© 2025 Magic Studio. Tous droits réservés.',
-        'footer-linkedin': 'LinkedIn',
-        'footer-behance': 'Behance',
-        'footer-dribbble': 'Dribbble',
-        'alert-success': 'Merci pour votre message ! Je vous répondrai bientôt.',
+        'alert-success': 'Merci pour votre message ! Nous vous répondrons bientôt.',
         'alert-error': 'Veuillez remplir tous les champs.'
       }
     };
-
-    // Set language and update content
     function changeLanguage(lang) {
       document.querySelectorAll('[data-i18n]').forEach(element => {
         const key = element.getAttribute('data-i18n');
@@ -427,18 +502,12 @@
         const key = element.getAttribute('data-i18n-placeholder');
         element.placeholder = translations[lang][key];
       });
-      // Update HTML lang attribute
       document.documentElement.lang = lang;
-      // Store language preference
       localStorage.setItem('language', lang);
     }
-
-    // Initialize language
     const savedLang = localStorage.getItem('language') || 'en';
     document.getElementById('language-switcher').value = savedLang;
     changeLanguage(savedLang);
-
-    // Smooth scrolling
     document.querySelectorAll('a[href^="#"]').forEach(anchor => {
       anchor.addEventListener('click', function(e) {
         e.preventDefault();
@@ -447,8 +516,6 @@
         });
       });
     });
-
-    // Contact form submission
     document.getElementById('contact-btn').addEventListener('click', () => {
       const name = document.getElementById('name').value;
       const email = document.getElementById('email').value;
@@ -463,94 +530,70 @@
         alert(translations[lang]['alert-error']);
       }
     });
-
-    // Black-Themed Twinkling Stars with Enhanced Mouse-Interactive Shape-Forming Connections and Shooting Stars
     const canvas = document.getElementById('canvas');
     const ctx = canvas.getContext('2d');
     let width, height;
-    let mouseX = -1000; // Initial off-canvas position
+    let mouseX = -1000;
     let mouseY = -1000;
-
     function resizeCanvas() {
       width = window.innerWidth;
       height = window.innerHeight;
       canvas.width = width;
       canvas.height = height;
     }
-
     resizeCanvas();
     window.addEventListener('resize', resizeCanvas);
-
-    // Track mouse movement
     canvas.addEventListener('mousemove', (event) => {
       const rect = canvas.getBoundingClientRect();
       mouseX = event.clientX - rect.left;
       mouseY = event.clientY - rect.top;
     });
-
-    // Handle mouse leaving the canvas
     canvas.addEventListener('mouseleave', () => {
       mouseX = -1000;
       mouseY = -1000;
     });
-
-    // Fixed twinkling stars
     const particles = [];
-    const particleCount = 200; // Dense starfield
-    const maxDistance = 100; // For shape-forming connections
-    const minDistance = 20; // Minimum distance for full opacity
-    const mouseRadius = 200; // Increased radius of mouse influence
-
+    const particleCount = 200;
+    const maxDistance = 100;
+    const minDistance = 20;
+    const mouseRadius = 200;
     for (let i = 0; i < particleCount; i++) {
       particles.push({
         x: Math.random() * width,
         y: Math.random() * height,
-        baseRadius: 1 + Math.random() * 2, // Varying star sizes (1-3px)
-        twinkleOffset: Math.random() * Math.PI * 2, // Random phase for twinkle
-        shapePhase: Math.random() * Math.PI * 2 // Random phase for shape fading
+        baseRadius: 1 + Math.random() * 2,
+        twinkleOffset: Math.random() * Math.PI * 2,
+        shapePhase: Math.random() * Math.PI * 2
       });
     }
-
-    // Shooting stars
     const shootingStars = [];
-    const maxShootingStars = 3; // Limit simultaneous shooting stars
-
+    const maxShootingStars = 3;
     function createShootingStar() {
       if (shootingStars.length < maxShootingStars) {
         const angle = Math.random() * Math.PI * 2;
-        const speed = 5 + Math.random() * 5; // Speed between 5-10px per frame
+        const speed = 5 + Math.random() * 5;
         shootingStars.push({
           x: Math.random() * width,
           y: Math.random() * height,
           vx: Math.cos(angle) * speed,
           vy: Math.sin(angle) * speed,
-          lifespan: 1000, // 1 second in milliseconds
+          lifespan: 1000,
           startTime: Date.now(),
-          radius: 1 + Math.random() // Smaller size (1-2px)
+          radius: 1 + Math.random()
         });
       }
     }
-
-    // Create a shooting star every 5 seconds
     setInterval(createShootingStar, 5000);
-
     function animate() {
       ctx.clearRect(0, 0, width, height);
-
-      // Draw twinkling stars
       particles.forEach(p => {
-        // Calculate distance to mouse
         const dx = mouseX - p.x;
         const dy = mouseY - p.y;
         const mouseDist = Math.sqrt(dx * dx + dy * dy);
         const mouseInfluence = mouseDist < mouseRadius ? (1 - mouseDist / mouseRadius) : 0;
-
-        // Increase radius and opacity near mouse
-        const radius = p.baseRadius + mouseInfluence * 2; // Up to 2px increase
+        const radius = p.baseRadius + mouseInfluence * 2;
         let opacity = 0.5 + 0.5 * (Math.sin(Date.now() * 0.003 + p.twinkleOffset) + 1) / 2;
-        opacity = Math.min(1, opacity + mouseInfluence * 0.5); // Boost opacity up to 0.5 extra
-
-        // Draw star with glow
+        opacity = Math.min(1, opacity + mouseInfluence * 0.5);
         ctx.beginPath();
         const gradient = ctx.createRadialGradient(p.x, p.y, 0, p.x, p.y, radius * 2);
         gradient.addColorStop(0, `rgba(255, 255, 255, ${opacity})`);
@@ -559,19 +602,15 @@
         ctx.fillStyle = gradient;
         ctx.fill();
       });
-
-      // Draw mouse glow (subtle visual feedback)
       if (mouseX >= 0 && mouseY >= 0) {
         ctx.beginPath();
         const glowGradient = ctx.createRadialGradient(mouseX, mouseY, 0, mouseX, mouseY, mouseRadius / 2);
-        glowGradient.addColorStop(0, 'rgba(168, 85, 247, 0.2)'); // Subtle purple glow
+        glowGradient.addColorStop(0, 'rgba(168, 85, 247, 0.2)');
         glowGradient.addColorStop(1, 'rgba(168, 85, 247, 0)');
         ctx.arc(mouseX, mouseY, mouseRadius / 2, 0, Math.PI * 2);
         ctx.fillStyle = glowGradient;
         ctx.fill();
       }
-
-      // Collect connections for shape formation
       const connections = [];
       for (let i = 0; i < particles.length; i++) {
         for (let j = i + 1; j < particles.length; j++) {
@@ -580,73 +619,53 @@
           const dx = p2.x - p1.x;
           const dy = p2.y - p1.y;
           const distance = Math.sqrt(dx * dx + dy * dy);
-
           if (distance < maxDistance) {
-            // Calculate mouse influence for connection
             const mouseDist1 = Math.sqrt((mouseX - p1.x) ** 2 + (mouseY - p1.y) ** 2);
             const mouseDist2 = Math.sqrt((mouseX - p2.x) ** 2 + (mouseY - p2.y) ** 2);
             const mouseInfluence = Math.max(
               mouseDist1 < mouseRadius ? (1 - mouseDist1 / mouseRadius) : 0,
               mouseDist2 < mouseRadius ? (1 - mouseDist2 / mouseRadius) : 0
             );
-
             connections.push({ p1, p2, distance, mouseInfluence });
           }
         }
       }
-
-      // Sort connections by distance to prioritize shorter ones for shapes
       connections.sort((a, b) => a.distance - b.distance);
-
-      // Draw connections to form shapes
       connections.forEach(({ p1, p2, distance, mouseInfluence }) => {
-        // Calculate cyclic fading opacity for shapes
         const shapeOpacity = 0.5 * (Math.sin(Date.now() * 0.001 + (p1.shapePhase + p2.shapePhase) / 2) + 1);
-        // Combine with distance-based opacity
         const distanceOpacity = Math.max(0, 1 - (distance - minDistance) / (maxDistance - minDistance));
-        // Boost opacity with mouse influence
-        let lineOpacity = shapeOpacity * distanceOpacity * (0.8 + mouseInfluence * 0.6); // Base 0.8, up to 1.4 near mouse
-
+        let lineOpacity = shapeOpacity * distanceOpacity * (0.8 + mouseInfluence * 0.6);
         const gradient = ctx.createLinearGradient(p1.x, p1.y, p2.x, p2.y);
-        gradient.addColorStop(0, `rgba(30, 58, 138, ${lineOpacity})`); // Deep blue #1E3A8A
-        gradient.addColorStop(1, `rgba(168, 85, 247, ${lineOpacity})`); // Purple #A855F7
+        gradient.addColorStop(0, `rgba(30, 58, 138, ${lineOpacity})`);
+        gradient.addColorStop(1, `rgba(168, 85, 247, ${lineOpacity})`);
         ctx.beginPath();
         ctx.moveTo(p1.x, p1.y);
         ctx.lineTo(p2.x, p2.y);
         ctx.strokeStyle = gradient;
-        ctx.lineWidth = 1.0; // Thicker for visibility
+        ctx.lineWidth = 1.0;
         ctx.globalAlpha = lineOpacity;
         ctx.stroke();
         ctx.globalAlpha = 1;
       });
-
-      // Update and draw shooting stars
       const now = Date.now();
       shootingStars.forEach((s, index) => {
-        // Calculate opacity based on remaining lifespan, brighter range
         const elapsed = now - s.startTime;
         if (elapsed > s.lifespan) {
-          shootingStars.splice(index, 1); // Remove expired shooting star
+          shootingStars.splice(index, 1);
           return;
         }
-        const opacity = 0.5 + 0.5 * (1 - elapsed / s.lifespan); // Range 0.5-1.0
-
-        // Update position
+        const opacity = 0.5 + 0.5 * (1 - elapsed / s.lifespan);
         s.x += s.vx;
         s.y += s.vy;
-
-        // Draw trail
         ctx.beginPath();
         const trailGradient = ctx.createLinearGradient(s.x, s.y, s.x - s.vx * 2, s.y - s.vy * 2);
         trailGradient.addColorStop(0, `rgba(255, 255, 255, ${opacity * 0.8})`);
         trailGradient.addColorStop(1, 'rgba(255, 255, 255, 0)');
         ctx.moveTo(s.x, s.y);
-        ctx.lineTo(s.x - s.vx * 2, s.y - s.vy * 2); // Short trail
+        ctx.lineTo(s.x - s.vx * 2, s.y - s.vy * 2);
         ctx.strokeStyle = trailGradient;
         ctx.lineWidth = 1;
         ctx.stroke();
-
-        // Draw shooting star
         ctx.beginPath();
         const gradient = ctx.createRadialGradient(s.x, s.y, 0, s.x, s.y, s.radius * 2);
         gradient.addColorStop(0, `rgba(255, 255, 255, ${opacity})`);
@@ -655,10 +674,8 @@
         ctx.fillStyle = gradient;
         ctx.fill();
       });
-
       requestAnimationFrame(animate);
     }
-
     animate();
   </script>
 </body>
