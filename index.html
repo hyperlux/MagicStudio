@@ -3,204 +3,442 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Magic Studio - Web Design Freelancer</title>
+  <title>Magic Studio - Creative Web Design</title>
   <script src="https://cdn.tailwindcss.com"></script>
-  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700;900&family=Playfair+Display:wght@400;700;900&display=swap" rel="stylesheet">
   <style>
     body {
-      font-family: 'Montserrat', sans-serif;
-      background: linear-gradient(135deg, #4C6EF5 0%, #FFD43B 50%, #FF8783 100%);
-      background-attachment: fixed;
-      background-size: cover;
+      font-family: 'Playfair Display', serif;
+      background: #000000; /* Black theme */
+      color: #FFFFFF; /* All text white */
+      scroll-behavior: smooth;
+      overflow-x: hidden;
+      margin: 0;
     }
-    .smooth-scroll { scroll-behavior: smooth; }
-    h1, h2, h3 { text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5); }
+    #canvas {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: -1;
+      background: #000000; /* Black canvas */
+      opacity: 0.6; /* Slightly increased for visibility */
+    }
+    .header {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      background: rgba(0, 0, 0, 0.8); /* Black with transparency */
+      backdrop-filter: blur(10px);
+      z-index: 1000;
+      padding: 1rem 0;
+    }
+    .header .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: flex;
+      justify-content: flex-end;
+      align-items: center;
+      padding: 0 1.5rem;
+    }
+    .header .logo {
+      font-size: 1.5rem;
+      font-weight: 900;
+      color: #FFFFFF; /* White logo */
+    }
+    .header nav a {
+      margin-left: 1.5rem;
+      color: #FFFFFF; /* White nav links */
+      text-decoration: none;
+      font-weight: 400;
+      transition: color 0.3s;
+    }
+    .header nav a:hover {
+      color: #D8B4FE; /* Lighter purple on hover */
+    }
+    .language-switcher select {
+      background: #2D2D2D;
+      color: #FFFFFF;
+      border: 1px solid #475569;
+      border-radius: 0.5rem;
+      padding: 0.5rem;
+      font-family: 'Inter', sans-serif;
+      cursor: pointer;
+      transition: border-color 0.3s;
+    }
+    .language-switcher select:focus {
+      border-color: #D8B4FE;
+      outline: none;
+    }
+    .hero {
+      height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      position: relative;
+    }
+    .hero h1 {
+      font-size: 4rem;
+      font-weight: 900;
+      background: linear-gradient(45deg, #FFFFFF, #FFFFFF); /* White gradient */
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+      animation: fadeInUp 1s ease-out;
+    }
+    .hero p {
+      font-size: 1.25rem;
+      color: #FFFFFF; /* White subtitle */
+      margin: 1rem 0;
+      max-width: 600px;
+      animation: fadeInUp 1.2s ease-out;
+    }
+    .hero a {
+      background: #A855F7; /* Purple button */
+      color: #FFFFFF; /* White button text */
+      padding: 0.75rem 2rem;
+      border-radius: 9999px;
+      font-weight: 700;
+      text-decoration: none;
+      transition: transform 0.3s, box-shadow 0.3s;
+      animation: fadeInUp 1.4s ease-out;
+    }
+    .hero a {
+      margin-top: 2rem; /* Added to lower the button */
+    }
+    .hero a:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 4px 12px rgba(216, 180, 254, 0.5); /* Lighter purple shadow */
+    }
+    section {
+      padding: 6rem 1.5rem;
+      max-width: 1200px;
+      margin: 0 auto;
+      position: relative;
+      z-index: 10;
+    }
+    h2 {
+      font-size: 2.5rem;
+      font-weight: 900;
+      text-align: center;
+      margin-bottom: 3rem;
+      color: #FFFFFF; /* White headings */
+      animation: fadeInUp 1s ease-out;
+    }
+    /* About Section */
+    #about .content {
+      background: rgba(30, 30, 30, 0.8); /* Dark gray with transparency */
+      border-radius: 1rem;
+      padding: 2rem;
+      max-width: 800px;
+      margin: 0 auto;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+      animation: fadeInUp 1.2s ease-out;
+    }
+    #about p {
+      font-size: 1.125rem;
+      line-height: 1.8;
+      color: #FFFFFF; /* White text */
+    }
+    /* Portfolio Section */
+    .portfolio-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 2rem;
+      justify-content: center;
+      max-width: 400px; /* Center single card */
+      margin: 0 auto;
+    }
+    .portfolio-card {
+      position: relative;
+      overflow: hidden;
+      border-radius: 1rem;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      background: rgba(30, 30, 30, 0.8); /* Dark gray card background */
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+      animation: fadeInUp 1s ease-out;
+    }
+    .portfolio-card:hover {
+      transform: scale(1.05);
+      box-shadow: 0 8px 25px rgba(216, 180, 254, 0.3);
+    }
+    .portfolio-card img {
+      width: 100%;
+      height: 250px;
+      object-fit: cover;
+      display: block;
+    }
+    .portfolio-card .overlay {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.6); /* Lighter black overlay */
+      opacity: 0;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      transition: opacity 0.3s ease;
+      padding: 1rem;
+    }
+    .portfolio-card:hover .overlay {
+      opacity: 1;
+    }
+    .portfolio-card h3 {
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: #FFFFFF; /* White title */
+      margin-bottom: 0.5rem;
+    }
+    .portfolio-card p {
+      font-size: 1rem;
+      color: #FFFFFF; /* White description */
+      text-align: center;
+      margin-bottom: 1rem;
+    }
+    .portfolio-card a {
+      color: #FFFFFF; /* White link */
+      text-decoration: underline;
+      font-size: 1rem;
+      transition: color 0.3s;
+    }
+    .portfolio-card a:hover {
+      color: #D8B4FE; /* Lighter purple on hover */
+    }
+    /* Contact Section */
+    #contact .contact-form {
+      background: rgba(30, 30, 30, 0.8); /* Dark gray form background */
+      border-radius: 1rem;
+      padding: 2rem;
+      max-width: 600px;
+      margin: 0 auto;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+      animation: fadeInUp 1.2s ease-out;
+    }
+    .contact-form input, .contact-form textarea {
+      background: #2D2D2D; /* Lighter input background */
+      border: 1px solid #475569;
+      color: #FFFFFF; /* White input text */
+      padding: 0.75rem;
+      border-radius: 0.5rem;
+      width: 100%;
+      margin-bottom: 1rem;
+      transition: border-color 0.3s, box-shadow 0.3s;
+    }
+    .contact-form input::placeholder, .contact-form textarea::placeholder {
+      color: #B0B0B0; /* Light gray placeholder */
+    }
+    .contact-form input:focus, .contact-form textarea:focus {
+      border-color: #D8B4FE; /* Lighter purple border */
+      box-shadow: 0 0 8px rgba(216, 180, 254, 0.5);
+      outline: none;
+    }
+    .contact-form button {
+      background: #A855F7; /* Purple button */
+      color: #FFFFFF; /* White button text */
+      padding: 0.75rem 2rem;
+      border-radius: 9999px;
+      font-weight: 700;
+      width: 100%;
+      transition: transform 0.3s, box-shadow 0.3s, background 0.3s;
+    }
+    .contact-form button:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 8px 20px rgba(216, 180, 254, 0.5);
+      background: #D8B4FE; /* Lighter purple on hover */
+      animation: pulse 1.5s infinite;
+    }
+    /* Footer */
+    footer {
+      background: #1E1E1E; /* Dark gray footer */
+      padding: 3rem 1.5rem;
+      text-align: center;
+      color: #FFFFFF; /* White footer text */
+      position: relative;
+      z-index: 10;
+      border-top: 1px solid rgba(255, 255, 255, 0.1);
+      animation: fadeInUp 1s ease-out;
+    }
+    footer p {
+      margin-bottom: 1rem;
+    }
+    footer a {
+      color: #FFFFFF; /* White footer links */
+      margin: 0 1rem;
+      text-decoration: none;
+      transition: color 0.3s;
+    }
+    footer a:hover {
+      color: #D8B4FE; /* Lighter purple on hover */
+    }
+    @keyframes fadeInUp {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    @keyframes pulse {
+      0% { box-shadow: 0 0 0 0 rgba(216, 180, 254, 0.5); }
+      70% { box-shadow: 0 0 0 10px rgba(216, 180, 254, 0); }
+      100% { box-shadow: 0 0 0 0 rgba(216, 180, 254, 0); }
+    }
   </style>
 </head>
-<body class="text-light-gray smooth-scroll">
-  <!-- Header with Language Toggle -->
-  <header class="bg-dark-secondary bg-opacity-90 text-white py-20 text-center relative">
-    <div class="absolute top-4 right-4">
-      <button id="lang-toggle" class="flex items-center space-x-2 text-sm text-white bg-purple px-3 py-1 rounded hover:bg-purple-600">
-        <img src="https://flagcdn.com/24x18/fr.png" alt="French Flag" class="w-6 h-4">
-        <span id="lang-text">Français</span>
-      </button>
+<body>
+  <!-- Canvas for Black-Themed Twinkling Stars with Enhanced Mouse-Interactive Shape-Forming Connections and Shooting Stars -->
+  <canvas id="canvas"></canvas>
+
+  <!-- Header -->
+  <header class="header">
+    <div class="container">
+      <div class="flex items-center">
+        <nav>
+          <a href="#about" data-i18n="nav-about">About</a>
+          <a href="#portfolio" data-i18n="nav-portfolio">Portfolio</a>
+          <a href="#contact" data-i18n="nav-contact">Contact</a>
+        </nav>
+        <div class="language-switcher ml-6">
+          <select id="language-switcher" onchange="changeLanguage(this.value)">
+            <option value="en">English</option>
+            <option value="fr">Français</option>
+          </select>
+        </div>
+      </div>
     </div>
-    <h1 class="text-4xl md:text-6xl font-bold mb-4 text-white" data-key="hero-title">Magic Studio</h1>
-    <p class="text-lg md:text-xl mb-6" data-key="hero-subtitle">Crafting Enchanted Digital Experiences</p>
-    <a href="#contact" class="bg-teal text-white py-3 px-6 rounded-full hover:bg-teal-600 transition" data-key="hero-cta">Get in Touch</a>
   </header>
 
-  <!-- About Section -->
-  <section id="about" class="py-16 px-4 md:px-20 bg-dark-secondary bg-opacity-90">
-    <h2 class="text-3xl font-bold text-center mb-8 text-white" data-key="about-title">About Magic Studio</h2>
-    <p class="text-lg max-w-2xl mx-auto text-center" data-key="about-text">
-      I'm a passionate freelance web designer dedicated to creating stunning, user-friendly websites that bring your vision to life. With expertise in modern design tools and technologies, I craft digital experiences that are both beautiful and functional.
-    </p>
+  <!-- Hero Section -->
+  <section class="hero">
+    <img src="logo5.png" alt="Magic Studio Logo" class="h-64">
+    <h1>Magic Studio</h1>
+    <p data-i18n="hero-subtitle">Crafting bold, creative, and seamless digital experiences.</p>
+    <a href="#contact" data-i18n="hero-button">Start Your Project</a>
   </section>
 
-  <!-- Services Section -->
-  <section id="services" class="py-16 px-4 md:px-20 bg-dark-secondary bg-opacity-90">
-    <h2 class="text-3xl font-bold text-center mb-8 text-white" data-key="services-title">Services</h2>
-    <div class="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-5xl mx-auto">
-      <div class="text-center">
-        <h3 class="text-xl font-bold mb-2 text-white" data-key="services-web-title">Web Design</h3>
-        <p class="text-light-gray" data-key="services-web-text">Custom, visually appealing designs tailored to your brand.</p>
-      </div>
-      <div class="text-center">
-        <h3 class="text-xl font-bold mb-2 text-white" data-key="services-uiux-title">UI/UX Design</h3>
-        <p class="text-light-gray" data-key="services-uiux-text">User-focused interfaces for seamless experiences.</p>
-      </div>
-      <div class="text-center">
-        <h3 class="text-xl font-bold mb-2 text-white" data-key="services-responsive-title">Responsive Design</h3>
-        <p class="text-light-gray" data-key="services-responsive-text">Websites that look great on any device.</p>
-      </div>
+  <!-- About Section -->
+  <section id="about">
+    <h2 data-i18n="section-about">About</h2>
+    <div class="content">
+      <p data-i18n="about-content">
+        I'm a freelance web designer with a passion for creating visually stunning and highly functional websites. My focus is on delivering tailored solutions that elevate your brand and engage your audience.
+      </p>
     </div>
   </section>
 
   <!-- Portfolio Section -->
-  <section id="portfolio" class="py-16 px-4 md:px-20 bg-dark-gray bg-opacity-90">
-    <h2 class="text-3xl font-bold text-center mb-8 text-white" data-key="portfolio-title">Portfolio</h2>
-    <div class="grid grid-cols-1 gap-8 max-w-5xl mx-auto">
-      <!-- Project 1 (Carrera Rallye) -->
-      <div class="bg-dark-secondary bg-opacity-90 rounded-lg shadow-lg overflow-hidden max-w-md mx-auto">
-        <img src="https://screenshot.guru/api/screenshot?url=https://carrerarallye.com" alt="Carrera Rallye" class="w-full h-48 object-cover">
-        <div class="p-4">
-          <h3 class="text-xl font-bold text-white" data-key="portfolio-project1-title">Carrera Rallye</h3>
-          <p class="text-light-gray" data-key="portfolio-project1-text">A dynamic website for Carrera Rallye, showcasing high-energy rally events with a sleek, modern design.</p>
+  <section id="portfolio">
+    <h2 data-i18n="section-portfolio">Portfolio</h2>
+    <div class="portfolio-grid">
+      <div class="portfolio-card">
+        <img src="https://screenshot.guru/api/screenshot?url=https://carrerarallye.com" alt="Carrera Rallye">
+        <div class="overlay">
+          <h3>Carrera Rallye</h3>
+          <p data-i18n="portfolio-carrera">A vibrant, modern website for high-energy rally events.</p>
+          <a href="https://carrerarallye.com" target="_blank" rel="noopener noreferrer" data-i18n="portfolio-link">Visit Website</a>
         </div>
       </div>
     </div>
   </section>
 
   <!-- Contact Section -->
-  <section id="contact" class="py-16 px-4 md:px-20 bg-dark-secondary bg-opacity-90 text-white">
-    <h2 class="text-3xl font-bold text-center mb-8" data-key="contact-title">Let's Work Together</h2>
-    <div class="max-w-lg mx-auto">
-      <div class="mb-4">
-        <label for="name" class="block text-sm font-medium mb-1 text-light-gray" data-key="contact-name-label">Name</label>
-        <input type="text" id="name" class="w-full p-3 rounded bg-input-bg text-light-gray border border-gray-400" placeholder="Your Name" data-key="contact-name-placeholder">
-      </div>
-      <div class="mb-4">
-        <label for="email" class="block text-sm font-medium mb-1 text-light-gray" data-key="contact-email-label">Email</label>
-        <input type="email" id="email" class="w-full p-3 rounded bg-input-bg text-light-gray border border-gray-400" placeholder="Your Email" data-key="contact-email-placeholder">
-      </div>
-      <div class="mb-4">
-        <label for="message" class="block text-sm font-medium mb-1 text-light-gray" data-key="contact-message-label">Message</label>
-        <textarea id="message" class="w-full p-3 rounded bg-input-bg text-light-gray border border-gray-400" rows="5" placeholder="Your Message" data-key="contact-message-placeholder"></textarea>
-      </div>
-      <button id="contact-btn" class="bg-teal text-white py-3 px-6 rounded-full hover:bg-teal-600 transition w-full" data-key="contact-btn">Send Message</button>
+  <section id="contact">
+    <h2 data-i18n="section-contact">Contact</h2>
+    <div class="contact-form">
+      <input type="text" id="name" data-i18n-placeholder="contact-name">
+      <input type="email" id="email" data-i18n-placeholder="contact-email">
+      <textarea id="message" rows="5" data-i18n-placeholder="contact-message"></textarea>
+      <button id="contact-btn" data-i18n="contact-button">Send Message</button>
     </div>
   </section>
 
   <!-- Footer -->
-  <footer class="bg-dark-gray bg-opacity-90 text-white py-6 text-center">
-    <p data-key="footer-copyright">© 2025 Magic Studio. All rights reserved.</p>
-    <div class="mt-2">
-      <a href="#" class="text-teal mx-2 hover:underline">LinkedIn</a>
-      <a href="#" class="text-teal mx-2 hover:underline">Behance</a>
-      <a href="#" class="text-teal mx-2 hover:underline">Dribbble</a>
+  <footer>
+    <p data-i18n="footer-copyright">© 2025 Magic Studio. All rights reserved.</p>
+    <div>
+      <a href="#" data-i18n="footer-linkedin">LinkedIn</a>
+      <a href="#" data-i18n="footer-behance">Behance</a>
+      <a href="#" data-i18n="footer-dribbble">Dribbble</a>
     </div>
   </footer>
 
   <!-- JavaScript -->
   <script>
-    // Custom Tailwind colors
-    document.documentElement.style.setProperty('--dark-gray', '#1F1F1F');
-    document.documentElement.style.setProperty('--dark-secondary', '#2D2D2D');
-    document.documentElement.style.setProperty('--light-gray', '#E2E8F0');
-    document.documentElement.style.setProperty('--white', '#F7FAFC');
-    document.documentElement.style.setProperty('--purple', '#805AD5');
-    document.documentElement.style.setProperty('--teal', '#4FD1C5');
-    document.documentElement.style.setProperty('--input-bg', '#4A5568');
-    document.documentElement.style.setProperty('--gray-400', '#A0AEC0');
-
-    // Language translations
+    // Translation object
     const translations = {
       en: {
-        'lang-text': 'Français',
-        'hero-title': 'Magic Studio',
-        'hero-subtitle': 'Crafting Enchanted Digital Experiences',
-        'hero-cta': 'Get in Touch',
-        'about-title': 'About Magic Studio',
-        'about-text': "I'm a passionate freelance web designer dedicated to creating stunning, user-friendly websites that bring your vision to life. With expertise in modern design tools and technologies, I craft digital experiences that are both beautiful and functional.",
-        'portfolio-title': 'Portfolio',
-        'portfolio-project1-title': 'Carrera Rallye',
-        'portfolio-project1-text': 'A dynamic website for Carrera Rallye, showcasing high-energy rally events with a sleek, modern design.',
-        'services-title': 'Services',
-        'services-web-title': 'Web Design',
-        'services-web-text': 'Custom, visually appealing designs tailored to your brand.',
-        'services-uiux-title': 'UI/UX Design',
-        'services-uiux-text': 'User-focused interfaces for seamless experiences.',
-        'services-responsive-title': 'Responsive Design',
-        'services-responsive-text': 'Websites that look great on any device.',
-        'contact-title': "Let's Work Together",
-        'contact-name-label': 'Name',
-        'contact-name-placeholder': 'Your Name',
-        'contact-email-label': 'Email',
-        'contact-email-placeholder': 'Your Email',
-        'contact-message-label': 'Message',
-        'contact-message-placeholder': 'Your Message',
-        'contact-btn': 'Send Message',
-        'footer-copyright': '© 2025 Magic Studio. All rights reserved.'
+        'nav-about': 'About',
+        'nav-portfolio': 'Portfolio',
+        'nav-contact': 'Contact',
+        'hero-subtitle': 'Crafting bold, creative, and seamless digital experiences.',
+        'hero-button': 'Start Your Project',
+        'section-about': 'About',
+        'about-content': "I'm a freelance web designer with a passion for creating visually stunning and highly functional websites. My focus is on delivering tailored solutions that elevate your brand and engage your audience.",
+        'section-portfolio': 'Portfolio',
+        'portfolio-carrera': 'A vibrant, modern website for high-energy rally events.',
+        'portfolio-link': 'Visit Website',
+        'section-contact': 'Contact',
+        'contact-name': 'Your Name',
+        'contact-email': 'Your Email',
+        'contact-message': 'Your Message',
+        'contact-button': 'Send Message',
+        'footer-copyright': '© 2025 Magic Studio. All rights reserved.',
+        'footer-linkedin': 'LinkedIn',
+        'footer-behance': 'Behance',
+        'footer-dribbble': 'Dribbble',
+        'alert-success': 'Thank you for your message! I’ll get back to you soon.',
+        'alert-error': 'Please fill out all fields.'
       },
       fr: {
-        'lang-text': 'English',
-        'hero-title': 'Magic Studio',
-        'hero-subtitle': 'Créer des Expériences Numériques Enchantées',
-        'hero-cta': 'Contactez-moi',
-        'about-title': 'À Propos de Magic Studio',
-        'about-text': "Je suis un designer web freelance passionné, dédié à la création de sites web époustouflants et conviviaux qui donnent vie à votre vision. Avec une expertise dans les outils et technologies de design modernes, je conçois des expériences numériques à la fois belles et fonctionnelles.",
-        'portfolio-title': 'Portfolio',
-        'portfolio-project1-title': 'Carrera Rallye',
-        'portfolio-project1-text': 'Un site web dynamique pour Carrera Rallye, mettant en avant des événements de rallye énergiques avec un design moderne et élégant.',
-        'services-title': 'Services',
-        'services-web-title': 'Design Web',
-        'services-web-text': 'Designs personnalisés et visuellement attrayants adaptés à votre marque.',
-        'services-uiux-title': 'Design UI/UX',
-        'services-uiux-text': 'Interfaces centrées sur l’utilisateur pour des expériences fluides.',
-        'services-responsive-title': 'Design Réactif',
-        'services-responsive-text': 'Sites web qui s’affichent parfaitement sur tous les appareils.',
-        'contact-title': 'Travaillons Ensemble',
-        'contact-name-label': 'Nom',
-        'contact-name-placeholder': 'Votre Nom',
-        'contact-email-label': 'Email',
-        'contact-email-placeholder': 'Votre Email',
-        'contact-message-label': 'Message',
-        'contact-message-placeholder': 'Votre Message',
-        'contact-btn': 'Envoyer le Message',
-        'footer-copyright': '© 2025 Magic Studio. Tous droits réservés.'
+        'nav-about': 'À propos',
+        'nav-portfolio': 'Portfolio',
+        'nav-contact': 'Contact',
+        'hero-subtitle': 'Créer des expériences numériques audacieuses, créatives et fluides.',
+        'hero-button': 'Démarrer votre projet',
+        'section-about': 'À propos',
+        'about-content': "Je suis un designer web indépendant passionné par la création de sites web visuellement époustouflants et hautement fonctionnels. Mon objectif est de fournir des solutions sur mesure qui valorisent votre marque et captivent votre audience.",
+        'section-portfolio': 'Portfolio',
+        'portfolio-carrera': 'Un site web moderne et vibrant pour des événements de rallye dynamiques.',
+        'portfolio-link': 'Visiter le site',
+        'section-contact': 'Contact',
+        'contact-name': 'Votre nom',
+        'contact-email': 'Votre email',
+        'contact-message': 'Votre message',
+        'contact-button': 'Envoyer le message',
+        'footer-copyright': '© 2025 Magic Studio. Tous droits réservés.',
+        'footer-linkedin': 'LinkedIn',
+        'footer-behance': 'Behance',
+        'footer-dribbble': 'Dribbble',
+        'alert-success': 'Merci pour votre message ! Je vous répondrai bientôt.',
+        'alert-error': 'Veuillez remplir tous les champs.'
       }
     };
 
-    // Current language
-    let currentLang = 'en';
-
-    // Function to update text based on language
-    function updateLanguage(lang) {
-      document.querySelectorAll('[data-key]').forEach(element => {
-        const key = element.getAttribute('data-key');
-        if (translations[lang][key]) {
-          if (element.tagName === 'INPUT' || element.tagName === 'TEXTAREA') {
-            element.placeholder = translations[lang][key];
-          } else {
-            element.textContent = translations[lang][key];
-          }
-        }
+    // Set language and update content
+    function changeLanguage(lang) {
+      document.querySelectorAll('[data-i18n]').forEach(element => {
+        const key = element.getAttribute('data-i18n');
+        element.textContent = translations[lang][key];
       });
+      document.querySelectorAll('[data-i18n-placeholder]').forEach(element => {
+        const key = element.getAttribute('data-i18n-placeholder');
+        element.placeholder = translations[lang][key];
+      });
+      // Update HTML lang attribute
       document.documentElement.lang = lang;
+      // Store language preference
+      localStorage.setItem('language', lang);
     }
 
-    // Language toggle
-    document.getElementById('lang-toggle').addEventListener('click', () => {
-      currentLang = currentLang === 'en' ? 'fr' : 'en';
-      updateLanguage(currentLang);
-      document.getElementById('lang-text').textContent = translations[currentLang]['lang-text'];
-      document.getElementById('lang-toggle').querySelector('img').src = currentLang === 'en' ? 'https://flagcdn.com/24x18/fr.png' : 'https://flagcdn.com/24x18/gb.png';
-      document.getElementById('lang-toggle').querySelector('img').alt = currentLang === 'en' ? 'French Flag' : 'English Flag';
-    });
+    // Initialize language
+    const savedLang = localStorage.getItem('language') || 'en';
+    document.getElementById('language-switcher').value = savedLang;
+    changeLanguage(savedLang);
 
-    // Smooth scrolling for nav links
+    // Smooth scrolling
     document.querySelectorAll('a[href^="#"]').forEach(anchor => {
       anchor.addEventListener('click', function(e) {
         e.preventDefault();
@@ -210,23 +448,218 @@
       });
     });
 
-    // Contact form submission (placeholder)
+    // Contact form submission
     document.getElementById('contact-btn').addEventListener('click', () => {
       const name = document.getElementById('name').value;
       const email = document.getElementById('email').value;
       const message = document.getElementById('message').value;
+      const lang = document.getElementById('language-switcher').value;
       if (name && email && message) {
-        alert(currentLang === 'en' ? 'Thank you for your message! I’ll get back to you soon.' : 'Merci pour votre message ! Je vous répondrai bientôt.');
+        alert(translations[lang]['alert-success']);
         document.getElementById('name').value = '';
         document.getElementById('email').value = '';
         document.getElementById('message').value = '';
       } else {
-        alert(currentLang === 'en' ? 'Please fill out all fields.' : 'Veuillez remplir tous les champs.');
+        alert(translations[lang]['alert-error']);
       }
     });
 
-    // Initialize language
-    updateLanguage(currentLang);
+    // Black-Themed Twinkling Stars with Enhanced Mouse-Interactive Shape-Forming Connections and Shooting Stars
+    const canvas = document.getElementById('canvas');
+    const ctx = canvas.getContext('2d');
+    let width, height;
+    let mouseX = -1000; // Initial off-canvas position
+    let mouseY = -1000;
+
+    function resizeCanvas() {
+      width = window.innerWidth;
+      height = window.innerHeight;
+      canvas.width = width;
+      canvas.height = height;
+    }
+
+    resizeCanvas();
+    window.addEventListener('resize', resizeCanvas);
+
+    // Track mouse movement
+    canvas.addEventListener('mousemove', (event) => {
+      const rect = canvas.getBoundingClientRect();
+      mouseX = event.clientX - rect.left;
+      mouseY = event.clientY - rect.top;
+    });
+
+    // Handle mouse leaving the canvas
+    canvas.addEventListener('mouseleave', () => {
+      mouseX = -1000;
+      mouseY = -1000;
+    });
+
+    // Fixed twinkling stars
+    const particles = [];
+    const particleCount = 200; // Dense starfield
+    const maxDistance = 100; // For shape-forming connections
+    const minDistance = 20; // Minimum distance for full opacity
+    const mouseRadius = 200; // Increased radius of mouse influence
+
+    for (let i = 0; i < particleCount; i++) {
+      particles.push({
+        x: Math.random() * width,
+        y: Math.random() * height,
+        baseRadius: 1 + Math.random() * 2, // Varying star sizes (1-3px)
+        twinkleOffset: Math.random() * Math.PI * 2, // Random phase for twinkle
+        shapePhase: Math.random() * Math.PI * 2 // Random phase for shape fading
+      });
+    }
+
+    // Shooting stars
+    const shootingStars = [];
+    const maxShootingStars = 3; // Limit simultaneous shooting stars
+
+    function createShootingStar() {
+      if (shootingStars.length < maxShootingStars) {
+        const angle = Math.random() * Math.PI * 2;
+        const speed = 5 + Math.random() * 5; // Speed between 5-10px per frame
+        shootingStars.push({
+          x: Math.random() * width,
+          y: Math.random() * height,
+          vx: Math.cos(angle) * speed,
+          vy: Math.sin(angle) * speed,
+          lifespan: 1000, // 1 second in milliseconds
+          startTime: Date.now(),
+          radius: 1 + Math.random() // Smaller size (1-2px)
+        });
+      }
+    }
+
+    // Create a shooting star every 5 seconds
+    setInterval(createShootingStar, 5000);
+
+    function animate() {
+      ctx.clearRect(0, 0, width, height);
+
+      // Draw twinkling stars
+      particles.forEach(p => {
+        // Calculate distance to mouse
+        const dx = mouseX - p.x;
+        const dy = mouseY - p.y;
+        const mouseDist = Math.sqrt(dx * dx + dy * dy);
+        const mouseInfluence = mouseDist < mouseRadius ? (1 - mouseDist / mouseRadius) : 0;
+
+        // Increase radius and opacity near mouse
+        const radius = p.baseRadius + mouseInfluence * 2; // Up to 2px increase
+        let opacity = 0.5 + 0.5 * (Math.sin(Date.now() * 0.003 + p.twinkleOffset) + 1) / 2;
+        opacity = Math.min(1, opacity + mouseInfluence * 0.5); // Boost opacity up to 0.5 extra
+
+        // Draw star with glow
+        ctx.beginPath();
+        const gradient = ctx.createRadialGradient(p.x, p.y, 0, p.x, p.y, radius * 2);
+        gradient.addColorStop(0, `rgba(255, 255, 255, ${opacity})`);
+        gradient.addColorStop(1, 'rgba(255, 255, 255, 0)');
+        ctx.arc(p.x, p.y, radius, 0, Math.PI * 2);
+        ctx.fillStyle = gradient;
+        ctx.fill();
+      });
+
+      // Draw mouse glow (subtle visual feedback)
+      if (mouseX >= 0 && mouseY >= 0) {
+        ctx.beginPath();
+        const glowGradient = ctx.createRadialGradient(mouseX, mouseY, 0, mouseX, mouseY, mouseRadius / 2);
+        glowGradient.addColorStop(0, 'rgba(168, 85, 247, 0.2)'); // Subtle purple glow
+        glowGradient.addColorStop(1, 'rgba(168, 85, 247, 0)');
+        ctx.arc(mouseX, mouseY, mouseRadius / 2, 0, Math.PI * 2);
+        ctx.fillStyle = glowGradient;
+        ctx.fill();
+      }
+
+      // Collect connections for shape formation
+      const connections = [];
+      for (let i = 0; i < particles.length; i++) {
+        for (let j = i + 1; j < particles.length; j++) {
+          const p1 = particles[i];
+          const p2 = particles[j];
+          const dx = p2.x - p1.x;
+          const dy = p2.y - p1.y;
+          const distance = Math.sqrt(dx * dx + dy * dy);
+
+          if (distance < maxDistance) {
+            // Calculate mouse influence for connection
+            const mouseDist1 = Math.sqrt((mouseX - p1.x) ** 2 + (mouseY - p1.y) ** 2);
+            const mouseDist2 = Math.sqrt((mouseX - p2.x) ** 2 + (mouseY - p2.y) ** 2);
+            const mouseInfluence = Math.max(
+              mouseDist1 < mouseRadius ? (1 - mouseDist1 / mouseRadius) : 0,
+              mouseDist2 < mouseRadius ? (1 - mouseDist2 / mouseRadius) : 0
+            );
+
+            connections.push({ p1, p2, distance, mouseInfluence });
+          }
+        }
+      }
+
+      // Sort connections by distance to prioritize shorter ones for shapes
+      connections.sort((a, b) => a.distance - b.distance);
+
+      // Draw connections to form shapes
+      connections.forEach(({ p1, p2, distance, mouseInfluence }) => {
+        // Calculate cyclic fading opacity for shapes
+        const shapeOpacity = 0.5 * (Math.sin(Date.now() * 0.001 + (p1.shapePhase + p2.shapePhase) / 2) + 1);
+        // Combine with distance-based opacity
+        const distanceOpacity = Math.max(0, 1 - (distance - minDistance) / (maxDistance - minDistance));
+        // Boost opacity with mouse influence
+        let lineOpacity = shapeOpacity * distanceOpacity * (0.8 + mouseInfluence * 0.6); // Base 0.8, up to 1.4 near mouse
+
+        const gradient = ctx.createLinearGradient(p1.x, p1.y, p2.x, p2.y);
+        gradient.addColorStop(0, `rgba(30, 58, 138, ${lineOpacity})`); // Deep blue #1E3A8A
+        gradient.addColorStop(1, `rgba(168, 85, 247, ${lineOpacity})`); // Purple #A855F7
+        ctx.beginPath();
+        ctx.moveTo(p1.x, p1.y);
+        ctx.lineTo(p2.x, p2.y);
+        ctx.strokeStyle = gradient;
+        ctx.lineWidth = 1.0; // Thicker for visibility
+        ctx.globalAlpha = lineOpacity;
+        ctx.stroke();
+        ctx.globalAlpha = 1;
+      });
+
+      // Update and draw shooting stars
+      const now = Date.now();
+      shootingStars.forEach((s, index) => {
+        // Calculate opacity based on remaining lifespan, brighter range
+        const elapsed = now - s.startTime;
+        if (elapsed > s.lifespan) {
+          shootingStars.splice(index, 1); // Remove expired shooting star
+          return;
+        }
+        const opacity = 0.5 + 0.5 * (1 - elapsed / s.lifespan); // Range 0.5-1.0
+
+        // Update position
+        s.x += s.vx;
+        s.y += s.vy;
+
+        // Draw trail
+        ctx.beginPath();
+        const trailGradient = ctx.createLinearGradient(s.x, s.y, s.x - s.vx * 2, s.y - s.vy * 2);
+        trailGradient.addColorStop(0, `rgba(255, 255, 255, ${opacity * 0.8})`);
+        trailGradient.addColorStop(1, 'rgba(255, 255, 255, 0)');
+        ctx.moveTo(s.x, s.y);
+        ctx.lineTo(s.x - s.vx * 2, s.y - s.vy * 2); // Short trail
+        ctx.strokeStyle = trailGradient;
+        ctx.lineWidth = 1;
+        ctx.stroke();
+
+        // Draw shooting star
+        ctx.beginPath();
+        const gradient = ctx.createRadialGradient(s.x, s.y, 0, s.x, s.y, s.radius * 2);
+        gradient.addColorStop(0, `rgba(255, 255, 255, ${opacity})`);
+        gradient.addColorStop(1, 'rgba(255, 255, 255, 0)');
+        ctx.arc(s.x, s.y, s.radius, 0, Math.PI * 2);
+        ctx.fillStyle = gradient;
+        ctx.fill();
+      });
+
+      requestAnimationFrame(animate);
+    }
+
+    animate();
   </script>
 </body>
 </html>
