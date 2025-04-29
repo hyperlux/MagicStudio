@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Magic Studio - Creative Web Design</title>
   <script src="https://cdn.tailwindcss.com"></script>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;700;900&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;700;900&family=Montserrat:wght@800&display=swap" rel="stylesheet">
   <style>
     body {
       font-family: 'Inter', sans-serif;
@@ -23,7 +23,7 @@
       height: 100%;
       z-index: -1;
       background: #000000;
-      opacity: 0.6;
+      opacity: 0.7;
     }
     .header {
       position: fixed;
@@ -39,19 +39,33 @@
       max-width: 1200px;
       margin: 0 auto;
       display: flex;
-      justify-content: flex-end;
+      justify-content: space-between;
       align-items: center;
       padding: 0 1.5rem;
+    }
+    .header .logo {
+      display: flex;
+      align-items: center;
+    }
+    .header .logo img {
+      height: 40px;
+      margin-right: 0.5rem;
+    }
+    .header .logo h1 {
+      font-size: 1.8rem;
+      font-weight: 700;
+      color: #FFFFFF;
     }
     .header nav a {
       margin-left: 1.5rem;
       color: #FFFFFF;
       text-decoration: none;
       font-weight: 400;
-      transition: color 0.3s;
+      transition: color 0.3s, transform 0.3s;
     }
     .header nav a:hover {
       color: #D8B4FE;
+      transform: scale(1.1);
     }
     .language-switcher select {
       background: #2D2D2D;
@@ -77,17 +91,24 @@
       position: relative;
     }
     .hero h1 {
-      font-size: 4rem;
-      font-weight: 900;
-      background: linear-gradient(45deg, #FFFFFF, #FFFFFF);
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 800;
+      font-size: 5rem;
+      background: linear-gradient(45deg, #FFFFFF, #D8B4FE);
       -webkit-background-clip: text;
       background-clip: text;
       color: transparent;
       animation: fadeInUp 1s ease-out;
+      line-height: 1.2;
+    }
+    .hero h1 span {
+      display: inline-block;
+      opacity: 0;
+      animation: letterReveal 0.05s ease forwards;
     }
     .hero p {
       font-size: 1.25rem;
-      color: #FFFFFF;
+      color: #D1D5DB;
       margin: 1rem 0;
       max-width: 600px;
       animation: fadeInUp 1.2s ease-out;
@@ -104,8 +125,8 @@
       margin-top: 2rem;
     }
     .hero a:hover {
-      transform: translateY(-3px);
-      box-shadow: 0 4px 12px rgba(216, 180, 254, 0.5);
+      transform: translateY(-5px);
+      box-shadow: 0 8px 20px rgba(216, 180, 254, 0.6);
     }
     section {
       padding: 6rem 1.5rem;
@@ -120,9 +141,14 @@
       text-align: center;
       margin-bottom: 3rem;
       color: #FFFFFF;
-      animation: fadeInUp 1s ease-out;
+      opacity: 0;
+      transform: translateY(20px);
+      transition: opacity 0.5s ease, transform 0.5s ease;
     }
-    /* Updated About Section */
+    section.visible h2 {
+      opacity: 1;
+      transform: translateY(0);
+    }
     #about .content {
       background: rgba(30, 30, 30, 0.4);
       backdrop-filter: blur(12px);
@@ -132,13 +158,19 @@
       max-width: 900px;
       margin: 0 auto;
       box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
-      animation: scaleIn 1s ease-out;
       position: relative;
       overflow: hidden;
       transition: transform 0.3s ease, box-shadow 0.3s ease;
       display: flex;
-      flex-direction: column;
+      align-items: center;
       gap: 2rem;
+      opacity: 0;
+      transform: scale(0.95);
+      transition: opacity 0.5s ease, transform 0.5s ease;
+    }
+    section.visible #about .content {
+      opacity: 1;
+      transform: scale(1);
     }
     #about .content:hover {
       transform: translateY(-5px);
@@ -153,34 +185,17 @@
       height: 4px;
       background: linear-gradient(90deg, #A855F7, #D8B4FE);
     }
-    #about .content .section {
+    #about .content svg {
+      width: 60px;
+      height: 60px;
+      fill: #D8B4FE;
       opacity: 0;
-      animation: fadeInSection 0.8s ease-out forwards;
+      transform: rotate(-10deg);
+      transition: opacity 0.5s ease 0.2s, transform 0.5s ease 0.2s;
     }
-    #about .content .section:nth-child(1) {
-      animation-delay: 0.2s;
-    }
-    #about .content .section:nth-child(2) {
-      animation-delay: 0.4s;
-    }
-    #about .content .section:nth-child(3) {
-      animation-delay: 0.6s;
-    }
-    #about .content .section:not(:last-child)::after {
-      content: '';
-      display: block;
-      width: 50px;
-      height: 1px;
-      background: linear-gradient(90deg, #A855F7, #D8B4FE);
-      margin: 1.5rem auto;
-      opacity: 0.5;
-    }
-    #about .content h3 {
-      font-size: 1.5rem;
-      font-weight: 700;
-      color: #FFFFFF;
-      margin-bottom: 0.5rem;
-      text-align: center;
+    section.visible #about .content svg {
+      opacity: 1;
+      transform: rotate(0);
     }
     #about .content p {
       font-size: 1.1rem;
@@ -189,55 +204,88 @@
       letter-spacing: 0.02em;
       font-weight: 300;
       margin: 0;
-      text-align: center;
+      opacity: 0;
+      transform: translateY(10px);
+      transition: opacity 0.5s ease 0.4s, transform 0.5s ease 0.4s;
     }
-    #about .highlight {
-      background: linear-gradient(90deg, #A855F7, #D8B4FE);
-      -webkit-background-clip: text;
-      background-clip: text;
-      color: transparent;
-      font-weight: 700;
+    section.visible #about .content p {
+      opacity: 1;
+      transform: translateY(0);
     }
-    @media (max-width: 768px) {
-      #about .content {
-        padding: 2rem;
-        max-width: 100%;
-      }
-      #about .content h3 {
-        font-size: 1.3rem;
-      }
-      #about .content p {
-        font-size: 1rem;
-        line-height: 1.7;
-      }
+    #portfolio {
+      position: relative;
     }
-    /* Portfolio Section */
-    .portfolio-grid {
+    #portfolio .background-shapes {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: -1;
+      overflow: hidden;
+    }
+    #portfolio .shape {
+      position: absolute;
+      background: rgba(168, 85, 247, 0.2);
+      border-radius: 50%;
+      opacity: 0;
+      transform: scale(0);
+      transition: opacity 0.5s ease, transform 0.5s ease;
+    }
+    section.visible #portfolio .shape {
+      opacity: 0.5;
+      transform: scale(1);
+    }
+    #portfolio .shape:nth-child(1) {
+      width: 200px;
+      height: 200px;
+      top: 10%;
+      left: 10%;
+      transition-delay: 0.1s;
+    }
+    #portfolio .shape:nth-child(2) {
+      width: 150px;
+      height: 150px;
+      top: 60%;
+      right: 15%;
+      transition-delay: 0.3s;
+    }
+    #portfolio .portfolio-grid {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
       gap: 2rem;
       justify-content: center;
-      max-width: 400px;
-      margin: 0 auto;
     }
     .portfolio-card {
       position: relative;
       overflow: hidden;
       border-radius: 1rem;
-      transition: transform 0.3s ease, box-shadow 0.3s ease;
       background: rgba(30, 30, 30, 0.8);
       box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
-      animation: fadeInUp 1s ease-out;
+      opacity: 0;
+      transform: translateY(20px);
+      transition: opacity 0.5s ease, transform 0.5s ease;
     }
+    section.visible .portfolio-card {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    .portfolio-card:nth-child(1) { transition-delay: 0.1s; }
+    .portfolio-card:nth-child(2) { transition-delay: 0.2s; }
+    .portfolio-card:nth-child(3) { transition-delay: 0.3s; }
     .portfolio-card:hover {
-      transform: scale(1.05);
-      box-shadow: 0 8px 25px rgba(216, 180, 254, 0.3);
+      transform: scale(1.1);
+      box-shadow: 0 12px 30px rgba(216, 180, 254, 0.4);
     }
     .portfolio-card img {
       width: 100%;
       height: 250px;
       object-fit: cover;
       display: block;
+      transition: transform 0.5s ease;
+    }
+    .portfolio-card:hover img {
+      transform: scale(1.1);
     }
     .portfolio-card .overlay {
       position: absolute;
@@ -278,7 +326,451 @@
     .portfolio-card a:hover {
       color: #D8B4FE;
     }
-    /* Contact Section */
+    #services .services-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 2rem;
+      text-align: center;
+    }
+    .services-grid div {
+      background: rgba(30, 30, 30, 0.8);
+      border-radius: 1rem;
+      padding: 2rem;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+      opacity: 0;
+      transition: opacity 0.5s ease, transform 0.5s ease;
+    }
+    section.visible .services-grid div {
+      opacity: 1;
+    }
+    .services-grid div:nth-child(1) { transform: translateX(-50px); transition-delay: 0.1s; }
+    .services-grid div:nth-child(2) { transform: translateY(50px); transition-delay: 0.2s; }
+    .services-grid div:nth-child(3) { transform: translateX(50px); transition-delay: 0.3s; }
+    section.visible .services-grid div:nth-child(1),
+    section.visible .services-grid div:nth-child(2),
+    section.visible .services-grid div:nth-child(3) {
+      transform: translate(0);
+    }
+    .services-grid div:hover {
+      transform: translateY(-10px);
+    }
+    .services-grid svg {
+      width: 40px;
+      height: 40px;
+      fill: #D8B4FE;
+      margin-bottom: 1rem;
+      opacity: 0;
+      transform: scale(0.8);
+      transition: opacity 0.5s ease, transform 0.5s ease;
+    }
+    section.visible .services-grid svg {
+      opacity: 1;
+      transform: scale(1);
+    }
+    .services-grid h3 {
+      font-size: 1.25rem;
+      font-weight: 700;
+      color: #FFFFFF;
+      margin-bottom: 0.5rem;
+    }
+    .services-grid p {
+      font-size: 1rem;
+      color: #D1D5DB;
+    }
+    #contact {
+      position: relative;
+    }
+    #contact .contact-form {
+      background: rgba(30, 30, 30, 0.8);
+      border-radius: 1rem;
+      padding: 2rem;
+      max-width: 600px;
+      margin: 0 auto;
+      box-shadow: 0 4px 20px rgba(0, 0۱۴۰
+
+System: <xaiArtifact artifact_id="70ed9fbf-5c9c-4359-9627-8d19984dc80a" artifact_version_id="d9001abd-2d0a-4fd5-9ee1-c2d9c4f16e20" title="index.html" contentType="text/html">
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Magic Studio - Creative Web Design</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;700;900&family=Montserrat:wght@800&display=swap" rel="stylesheet">
+  <style>
+    body {
+      font-family: 'Inter', sans-serif;
+      background: #000000;
+      color: #FFFFFF;
+      scroll-behavior: smooth;
+      overflow-x: hidden;
+      margin: 0;
+    }
+    #canvas {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: -1;
+      background: #000000;
+      opacity: 0.7;
+    }
+    .header {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      background: rgba(0, 0, 0, 0.8);
+      backdrop-filter: blur(10px);
+      z-index: 1000;
+      padding: 1rem 0;
+    }
+    .header .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 0 1.5rem;
+    }
+    .header .logo {
+      display: flex;
+      align-items: center;
+    }
+    .header .logo img {
+      height: 40px;
+      margin-right: 0.5rem;
+    }
+    .header .logo h1 {
+      font-size: 1.8rem;
+      font-weight: 700;
+      color: #FFFFFF;
+    }
+    .header nav a {
+      margin-left: 1.5rem;
+      color: #FFFFFF;
+      text-decoration: none;
+      font-weight: 400;
+      transition: color 0.3s, transform 0.3s;
+    }
+    .header nav a:hover {
+      color: #D8B4FE;
+      transform: scale(1.1);
+    }
+    .language-switcher select {
+      background: #2D2D2D;
+      color: #FFFFFF;
+      border: 1px solid #475569;
+      border-radius: 0.5rem;
+      padding: 0.5rem;
+      font-family: 'Inter', sans-serif;
+      cursor: pointer;
+      transition: border-color 0.3s;
+    }
+    .language-switcher select:focus {
+      border-color: #D8B4FE;
+      outline: none;
+    }
+    .hero {
+      height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      position: relative;
+    }
+    .hero h1 {
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 800;
+      font-size: 5rem;
+      background: linear-gradient(45deg, #FFFFFF, #D8B4FE);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+      animation: fadeInUp 1s ease-out;
+      line-height: 1.2;
+    }
+    .hero h1 span {
+      display: inline-block;
+      opacity: 0;
+      animation: letterReveal 0.05s ease forwards;
+    }
+    .hero p {
+      font-size: 1.25rem;
+      color: #D1D5DB;
+      margin: 1rem 0;
+      max-width: 600px;
+      animation: fadeInUp 1.2s ease-out;
+    }
+    .hero a {
+      background: #A855F7;
+      color: #FFFFFF;
+      padding: 0.75rem 2rem;
+      border-radius: 9999px;
+      font-weight: 700;
+      text-decoration: none;
+      transition: transform 0.3s, box-shadow 0.3s;
+      animation: fadeInUp 1.4s ease-out;
+      margin-top: 2rem;
+    }
+    .hero a:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 8px 20px rgba(216, 180, 254, 0.6);
+    }
+    section {
+      padding: 6rem 1.5rem;
+      max-width: 1200px;
+      margin: 0 auto;
+      position: relative;
+      z-index: 10;
+    }
+    h2 {
+      font-size: 2.5rem;
+      font-weight: 900;
+      text-align: center;
+      margin-bottom: 3rem;
+      color: #FFFFFF;
+      opacity: 0;
+      transform: translateY(20px);
+      transition: opacity 0.5s ease, transform 0.5s ease;
+    }
+    section.visible h2 {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    #about .content {
+      background: rgba(30, 30, 30, 0.4);
+      backdrop-filter: blur(12px);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 1.5rem;
+      padding: 3rem;
+      max-width: 900px;
+      margin: 0 auto;
+      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+      position: relative;
+      overflow: hidden;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      display: flex;
+      align-items: center;
+      gap: 2rem;
+      opacity: 0;
+      transform: scale(0.95);
+      transition: opacity 0.5s ease, transform 0.5s ease;
+    }
+    section.visible #about .content {
+      opacity: 1;
+      transform: scale(1);
+    }
+    #about .content:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 12px 40px rgba(168, 85, 247, 0.3);
+    }
+    #about .content::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 4px;
+      background: linear-gradient(90deg, #A855F7, #D8B4FE);
+    }
+    #about .content svg {
+      width: 60px;
+      height: 60px;
+      fill: #D8B4FE;
+      opacity: 0;
+      transform: rotate(-10deg);
+      transition: opacity 0.5s ease 0.2s, transform 0.5s ease 0.2s;
+    }
+    section.visible #about .content svg {
+      opacity: 1;
+      transform: rotate(0);
+    }
+    #about .content p {
+      font-size: 1.1rem;
+      line-height: 1.8;
+      color: #D1D5DB;
+      letter-spacing: 0.02em;
+      font-weight: 300;
+      margin: 0;
+      opacity: 0;
+      transform: translateY(10px);
+      transition: opacity 0.5s ease 0.4s, transform 0.5s ease 0.4s;
+    }
+    section.visible #about .content p {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    #portfolio {
+      position: relative;
+    }
+    #portfolio .background-shapes {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: -1;
+      overflow: hidden;
+    }
+    #portfolio .shape {
+      position: absolute;
+      background: rgba(168, 85, 247, 0.2);
+      border-radius: 50%;
+      opacity: 0;
+      transform: scale(0);
+      transition: opacity 0.5s ease, transform 0.5s ease;
+    }
+    section.visible #portfolio .shape {
+      opacity: 0.5;
+      transform: scale(1);
+    }
+    #portfolio .shape:nth-child(1) {
+      width: 200px;
+      height: 200px;
+      top: 10%;
+      left: 10%;
+      transition-delay: 0.1s;
+    }
+    #portfolio .shape:nth-child(2) {
+      width: 150px;
+      height: 150px;
+      top: 60%;
+      right: 15%;
+      transition-delay: 0.3s;
+    }
+    #portfolio .portfolio-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 2rem;
+      justify-content: center;
+    }
+    .portfolio-card {
+      position: relative;
+      overflow: hidden;
+      border-radius: 1rem;
+      background: rgba(30, 30, 30, 0.8);
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+      opacity: 0;
+      transform: translateY(20px);
+      transition: opacity 0.5s ease, transform 0.5s ease;
+    }
+    section.visible .portfolio-card {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    .portfolio-card:nth-child(1) { transition-delay: 0.1s; }
+    .portfolio-card:nth-child(2) { transition-delay: 0.2s; }
+    .portfolio-card:nth-child(3) { transition-delay: 0.3s; }
+    .portfolio-card:hover {
+      transform: scale(1.1);
+      box-shadow: 0 12px 30px rgba(216, 180, 254, 0.4);
+    }
+    .portfolio-card img {
+      width: 100%;
+      height: 250px;
+      object-fit: cover;
+      display: block;
+      transition: transform 0.5s ease;
+    }
+    .portfolio-card:hover img {
+      transform: scale(1.1);
+    }
+    .portfolio-card .overlay {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.6);
+      opacity: 0;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      transition: opacity 0.3s ease;
+      padding: 1rem;
+    }
+    .portfolio-card:hover .overlay {
+      opacity: 1;
+    }
+    .portfolio-card h3 {
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: #FFFFFF;
+      margin-bottom: 0.5rem;
+    }
+    .portfolio-card p {
+      font-size: 1rem;
+      color: #FFFFFF;
+      text-align: center;
+      margin-bottom: 1rem;
+    }
+    .portfolio-card a {
+      color: #FFFFFF;
+      text-decoration: underline;
+      font-size: 1rem;
+      transition: color 0.3s;
+    }
+    .portfolio-card a:hover {
+      color: #D8B4FE;
+    }
+    #services .services-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 2rem;
+      text-align: center;
+    }
+    .services-grid div {
+      background: rgba(30, 30, 30, 0.8);
+      border-radius: 1rem;
+      padding: 2rem;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+      opacity: 0;
+      transition: opacity 0.5s ease, transform 0.5s ease;
+    }
+    section.visible .services-grid div {
+      opacity: 1;
+    }
+    .services-grid div:nth-child(1) { transform: translateX(-50px); transition-delay: 0.1s; }
+    .services-grid div:nth-child(2) { transform: translateY(50px); transition-delay: 0.2s; }
+    .services-grid div:nth-child(3) { transform: translateX(50px); transition-delay: 0.3s; }
+    section.visible .services-grid div:nth-child(1),
+    section.visible .services-grid div:nth-child(2),
+    section.visible .services-grid div:nth-child(3) {
+      transform: translate(0);
+    }
+    .services-grid div:hover {
+      transform: translateY(-10px);
+    }
+    .services-grid svg {
+      width: 40px;
+      height: 40px;
+      fill: #D8B4FE;
+      margin-bottom: 1rem;
+      opacity: 0;
+      transform: scale(0.8);
+      transition: opacity 0.5s ease, transform 0.5s ease;
+    }
+    section.visible .services-grid svg {
+      opacity: 1;
+      transform: scale(1);
+    }
+    .services-grid h3 {
+      font-size: 1.25rem;
+      font-weight: 700;
+      color: #FFFFFF;
+      margin-bottom: 0.5rem;
+    }
+    .services-grid p {
+      font-size: 1rem;
+      color: #D1D5DB;
+    }
+    #contact {
+      position: relative;
+    }
     #contact .contact-form {
       background: rgba(30, 30, 30, 0.8);
       border-radius: 1rem;
@@ -287,6 +779,25 @@
       margin: 0 auto;
       box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
       animation: fadeInUp 1.2s ease-out;
+      position: relative;
+      opacity: 0;
+      transform: translateY(20px);
+      transition: opacity 0.5s ease, transform 0.5s ease;
+    }
+    section.visible #contact .contact-form {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    .contact-form::before {
+      content: '';
+      position: absolute;
+      top: -10px;
+      left: -10px;
+      right: -10px;
+      bottom: -10px;
+      background: radial-gradient(circle, rgba(168, 85, 247, 0.2) 0%, rgba(168, 85, 247, 0) 70%);
+      z-index: -1;
+      animation: pulseGlow 3s infinite;
     }
     .contact-form input, .contact-form textarea {
       background: #2D2D2D;
@@ -321,7 +832,6 @@
       background: #D8B4FE;
       animation: pulse 1.5s infinite;
     }
-    /* Footer */
     footer {
       background: #1E1E1E;
       padding: 3rem 1.5rem;
@@ -348,18 +858,39 @@
       from { opacity: 0; transform: translateY(20px); }
       to { opacity: 1; transform: translateY(0); }
     }
-    @keyframes scaleIn {
-      from { opacity: 0; transform: scale(0.95); }
-      to { opacity: 1; transform: scale(1); }
-    }
-    @keyframes fadeInSection {
-      from { opacity: 0; transform: translateY(10px); }
-      to { opacity: 1; transform: translateY(0); }
+    @keyframes letterReveal {
+      to { opacity: 1; }
     }
     @keyframes pulse {
       0% { box-shadow: 0 0 0 0 rgba(216, 180, 254, 0.5); }
       70% { box-shadow: 0 0 0 10px rgba(216, 180, 254, 0); }
       100% { box-shadow: 0 0 0 0 rgba(216, 180, 254, 0); }
+    }
+    @keyframes pulseGlow {
+      0% { opacity: 0.2; }
+      50% { opacity: 0.4; }
+      100% { opacity: 0.2; }
+    }
+    @media (max-width: 768px) {
+      .hero h1 {
+        font-size: 3rem;
+      }
+      #about .content {
+        padding: 2rem;
+        max-width: 100%;
+        flex-direction: column;
+      }
+      .header .container {
+        flex-direction: column;
+        align-items: flex-end;
+      }
+      .header .logo {
+        margin-bottom: 1rem;
+      }
+      .header nav a {
+        margin-left: 1rem;
+        margin-right: 1rem;
+      }
     }
   </style>
 </head>
@@ -367,10 +898,15 @@
   <canvas id="canvas"></canvas>
   <header class="header">
     <div class="container">
+      <div class="logo">
+        <img src="logo5.png" alt="Magic Studio Logo">
+        <h1>Magic Studio</h1>
+      </div>
       <div class="flex items-center">
         <nav>
           <a href="#about" data-i18n="nav-about">About</a>
           <a href="#portfolio" data-i18n="nav-portfolio">Portfolio</a>
+          <a href="#services" data-i18n="nav-services">Services</a>
           <a href="#contact" data-i18n="nav-contact">Contact</a>
         </nav>
         <div class="language-switcher ml-6">
@@ -383,50 +919,91 @@
     </div>
   </header>
   <section class="hero">
-    <img src="logo5.png" alt="Magic Studio Logo" class="h-64">
-    <h1>Magic Studio</h1>
-    <p data-i18n="hero-subtitle">Crafting bold, creative, and seamless digital experiences.</p>
-    <a href="#contact" data-i18n="hero-button">Start Your Project</a>
+    <h1 data-i18n="hero-title">
+      <span>W</span><span>h</span><span>a</span><span>t</span><span> </span>
+      <span>S</span><span>h</span><span>a</span><span>p</span><span>e</span><span> </span>
+      <span>W</span><span>i</span><span>l</span><span>l</span><span> </span>
+      <span>Y</span><span>o</span><span>u</span><span>r</span><span> </span>
+      <span>I</span><span>d</span><span>e</span><span>a</span><span> </span>
+      <span>T</span><span>a</span><span>k</span><span>e</span><span>?</span>
+    </h1>
+    <p data-i18n="hero-subtitle">Magic Studio transforms your vision into stunning, user-friendly websites.</p>
+    <a href="#contact" data-i18n="hero-button">Let’s Find Out</a>
   </section>
-  <!-- Updated About Section -->
   <section id="about">
-    <h2 data-i18n="section-about">About</h2>
+    <h2 data-i18n="section-about">From Vision to Victory</h2>
     <div class="content">
-      <div class="section">
-        <h3 data-i18n="about-why-title">Why We Create</h3>
-        <p data-i18n="about-why">
-          At Magic Studio, the belief is simple: exceptional design has the power to <span class="highlight">transform</span> brands and inspire audiences. Every project begins with a vision to redefine what’s possible in the digital world.
-        </p>
-      </div>
-      <div class="section">
-        <h3 data-i18n="about-how-title">How We Innovate</h3>
-        <p data-i18n="about-how">
-          By blending <span class="highlight">cutting-edge design</span> with meticulous attention to detail, Magic Studio crafts experiences that are as functional as they are beautiful. A client-first approach ensures every solution is tailored to perfection.
-        </p>
-      </div>
-      <div class="section">
-        <h3 data-i18n="about-what-title">What We Deliver</h3>
-        <p data-i18n="about-what">
-          The result? Stunning, <span class="highlight">high-performance websites</span> that elevate brands and captivate users. Magic Studio turns ideas into digital realities that stand out and drive success.
-        </p>
-      </div>
+      <svg viewBox="0 0 24 24"><path d="M12 2l2 6h6l-5 5 2 6-5-3-5 3 2-6-5-5h6z"/></svg>
+      <p data-i18n="about-text">
+        Every idea starts as a spark. At Magic Studio, we VEGA take that spark and sculpt it into a digital masterpiece. 
+        With expertise in design and a passion for innovation, we craft websites that don’t just exist—they inspire, engage, and deliver results.
+      </p>
     </div>
   </section>
   <section id="portfolio">
-    <h2 data-i18n="section-portfolio">Portfolio</h2>
+    <h2 data-i18n="section-portfolio">Ideas Brought to Life</h2>
+    <p data-i18n="portfolio-text">
+      See how we’ve turned concepts into stunning realities. Each project is a testament to our commitment to shaping your vision into a website that captivates and converts.
+    </p>
+    <div class="background-shapes">
+      <div class="shape"></div>
+      <div class="shape"></div>
+    </div>
     <div class="portfolio-grid">
       <div class="portfolio-card">
-        <img src="rallye.png" alt="Carrera Rallye">
+        <img src="https://via.placeholder.com/400x300?text=Project+1" alt="Project 1">
         <div class="overlay">
-          <h3>Carrera Rallye</h3>
-          <p data-i18n="portfolio-carrera">A vibrant, modern website for high-energy rally events.</p>
-          <a href="https://carrerarallye.com" target="_blank" rel="noopener noreferrer" data-i18n="portfolio-link">Visit Website</a>
+          <h3 data-i18n="portfolio-project1-title">Project 1</h3>
+          <p data-i18n="portfolio-project1">A stunning website designed to elevate the client’s brand.</p>
+          <a href="#" data-i18n="portfolio-link">View Project</a>
+        </div>
+      </div>
+      <div class="portfolio-card">
+        <img src="https://via.placeholder.com/400x300?text=Project+2" alt="Project 2">
+        <div class="overlay">
+          <h3 data-i18n="portfolio-project2-title">Project 2</h3>
+          <p data-i18n="portfolio-project2">A modern e-commerce platform with seamless user experience.</p>
+          <a href="#" data-i18n="portfolio-link">View Project</a>
+        </div>
+      </div>
+      <div class="portfolio-card">
+        <img src="https://via.placeholder.com/400x300?text=Project+3" alt="Project 3">
+        <div class="overlay">
+          <h3 data-i18n="portfolio-project3-title">Project 3</h3>
+          <p data-i18n="portfolio-project3">A creative portfolio site showcasing artistic talent.</p>
+          <a href="#" data-i18n="portfolio-link">View Project</a>
         </div>
       </div>
     </div>
   </section>
+  <section id="services">
+    <h2 data-i18n="section-services">Shaping Your Success</h2>
+    <p data-i18n="services-text">
+      Whether it’s a sleek website, an intuitive user experience, or a bold brand identity, we offer tailored solutions to make your idea shine. Let’s craft something that stands out.
+    </p>
+    <div class="services-grid">
+      <div>
+        <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.42 0-8-3.58-8-8s3.58-8 8-8 8 3.58 8 8-3.58 8-8 8zm-1-13h2v6h-2zm0 8h2v2h-2z"/></svg>
+        <h3 data-i18n="services-webdesign-title">Web Design</h3>
+        <p data-i18n="services-webdesign">Custom, responsive websites that captivate and convert.</p>
+      </div>
+      <div>
+        <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.42 0-8-3.58-8-8s3.58-8 8-8 8 3.58 8 8-3.58 8-8 8zm-1-13h2v6h-2zm0 8h2v2h-2z"/></svg>
+        <h3 data-i18n="services-uxui-title">UX/UI Design</h3>
+        <p data-i18n="services-uxui">Intuitive interfaces that enhance user satisfaction.</p>
+      </div>
+      <div>
+        <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.42 0-8-3.58-8-8s3.58-8 8-8 8 3.58 8 8-3.58 8-8 8zm-1-13h2v6h-2zm0 8h2v2h-2z"/></svg>
+        <h3 data-i18n="services-branding-title">Branding</h3>
+        <p data-i18n="services-branding">Memorable identities that resonate with your audience.</p>
+      </div>
+    </div>
+  </section>
   <section id="contact">
-    <h2 data-i18n="section-contact">Contact</h2>
+    <h2 data-i18n="section-contact">Let’s Shape Your Future</h2>
+    <p data-i18n="contact-text">
+      Your idea deserves to take form. Reach out today, and let’s start building a digital experience that leaves a lasting impression.
+    </p>
     <div class="contact-form">
       <input type="text" id="name" data-i18n-placeholder="contact-name">
       <input type="email" id="email" data-i18n-placeholder="contact-email">
@@ -445,20 +1022,32 @@
       en: {
         'nav-about': 'About',
         'nav-portfolio': 'Portfolio',
+        'nav-services': 'Services',
         'nav-contact': 'Contact',
-        'hero-subtitle': 'Crafting bold, creative, and seamless digital experiences.',
-        'hero-button': 'Start Your Project',
-        'section-about': 'About',
-        'about-why-title': 'Why We Create',
-        'about-why': "At Magic Studio, the belief is simple: exceptional design has the power to transform brands and inspire audiences. Every project begins with a vision to redefine what’s possible in the digital world.",
-        'about-how-title': 'How We Innovate',
-        'about-how': "By blending cutting-edge design with meticulous attention to detail, Magic Studio crafts experiences that are as functional as they are beautiful. A client-first approach ensures every solution is tailored to perfection.",
-        'about-what-title': 'What We Deliver',
-        'about-what': "The result? Stunning, high-performance websites that elevate brands and captivate users. Magic Studio turns ideas into digital realities that stand out and drive success.",
-        'section-portfolio': 'Portfolio',
-        'portfolio-carrera': 'A vibrant, modern website for high-energy rally events.',
-        'portfolio-link': 'Visit Website',
-        'section-contact': 'Contact',
+        'hero-title': 'What Shape Will Your Idea Take?',
+        'hero-subtitle': 'Magic Studio transforms your vision into stunning, user-friendly websites.',
+        'hero-button': 'Let’s Find Out',
+        'section-about': 'From Vision to Victory',
+        'about-text': 'Every idea starts as a spark. At Magic Studio, we take that spark and sculpt it into a digital masterpiece. With expertise in design and a passion for innovation, we craft websites that don’t just exist—they inspire, engage, and deliver results.',
+        'section-portfolio': 'Ideas Brought to Life',
+        'portfolio-text': 'See how we’ve turned concepts into stunning realities. Each project is a testament to our commitment to shaping your vision into a website that captivates and converts.',
+        'portfolio-project1-title': 'Project 1',
+        'portfolio-project1': 'A stunning website designed to elevate the client’s brand.',
+        'portfolio-project2-title': 'Project 2',
+        'portfolio-project2': 'A modern e-commerce platform with seamless user experience.',
+        'portfolio-project3-title': 'Project 3',
+        'portfolio-project3': 'A creative portfolio site showcasing artistic talent.',
+        'portfolio-link': 'View Project',
+        'section-services': 'Shaping Your Success',
+        'services-text': 'Whether it’s a sleek website, an intuitive user experience, or a bold brand identity, we offer tailored solutions to make your idea shine. Let’s craft something that stands out.',
+        'services-webdesign-title': 'Web Design',
+        'services-webdesign': 'Custom, responsive websites that captivate and convert.',
+        'services-uxui-title': 'UX/UI Design',
+        'services-uxui': 'Intuitive interfaces that enhance user satisfaction.',
+        'services-branding-title': 'Branding',
+        'services-branding': 'Memorable identities that resonate with your audience.',
+        'section-contact': 'Let’s Shape Your Future',
+        'contact-text': 'Your idea deserves to take form. Reach out today, and let’s start building a digital experience that leaves a lasting impression.',
         'contact-name': 'Your Name',
         'contact-email': 'Your Email',
         'contact-message': 'Your Message',
@@ -470,20 +1059,32 @@
       fr: {
         'nav-about': 'À propos',
         'nav-portfolio': 'Portfolio',
+        'nav-services': 'Services',
         'nav-contact': 'Contact',
-        'hero-subtitle': 'Créer des expériences numériques audacieuses, créatives et fluides.',
-        'hero-button': 'Démarrer votre projet',
-        'section-about': 'À propos',
-        'about-why-title': 'Pourquoi nous créons',
-        'about-why': "Chez Magic Studio, la conviction est simple : un design exceptionnel a le pouvoir de transformer les marques et d'inspirer les audiences. Chaque projet commence par une vision visant à redéfinir ce qui est possible dans le monde numérique.",
-        'about-how-title': 'Comment nous innovons',
-        'about-how': "En combinant un design de pointe avec une attention méticuleuse aux détails, Magic Studio crée des expériences aussi fonctionnelles qu'esthétiques. Une approche centrée sur le client garantit que chaque solution est parfaitement adaptée.",
-        'about-what-title': 'Ce que nous livrons',
-        'about-what': "Le résultat ? Des sites web époustouflants et performants qui élèvent les marques et captivent les utilisateurs. Magic Studio transforme les idées en réalités numériques qui se démarquent et génèrent du succès.",
-        'section-portfolio': 'Portfolio',
-        'portfolio-carrera': 'Un site web moderne et vibrant pour des événements de rallye dynamiques.',
-        'portfolio-link': 'Visiter le site',
-        'section-contact': 'Contact',
+        'hero-title': 'Quelle forme prendra votre idée ?',
+        'hero-subtitle': 'Magic Studio transforme votre vision en sites web époustouflants et conviviaux.',
+        'hero-button': 'Découvrons-le',
+        'section-about': 'De la vision à la victoire',
+        'about-text': 'Chaque idée commence par une étincelle. Chez Magic Studio, nous prenons cette étincelle et la sculptons en un chef-d’œuvre numérique. Avec une expertise en design et une passion pour l’innovation, nous créons des sites web qui ne se contentent pas d’exister : ils inspirent, engagent et produisent des résultats.',
+        'section-portfolio': 'Des idées devenues réalité',
+        'portfolio-text': 'Découvrez comment nous avons transformé des concepts en réalités époustouflantes. Chaque projet témoigne de notre engagement à façonner votre vision en un site web qui captive et convertit.',
+        'portfolio-project1-title': 'Projet 1',
+        'portfolio-project1': 'Un site web magnifique conçu pour sublimer la marque du client.',
+        'portfolio-project2-title': 'Projet 2',
+        'portfolio-project2': 'Une plateforme e-commerce moderne avec une expérience utilisateur fluide.',
+        'portfolio-project3-title': 'Projet 3',
+        'portfolio-project3': 'Un site de portfolio créatif mettant en valeur un talent artistique.',
+        'portfolio-link': 'Voir le projet',
+        'section-services': 'Façonner votre succès',
+        'services-text': 'Qu’il s’agisse d’un site web élégant, d’une expérience utilisateur intuitive ou d’une identité de marque audacieuse, nous proposons des solutions sur mesure pour faire briller votre idée. Créons quelque chose qui se démarque.',
+        'services-webdesign-title': 'Conception Web',
+        'services-webdesign': 'Sites web personnalisés et responsifs qui captivent et convertissent.',
+        'services-uxui-title': 'Design UX/UI',
+        'services-uxui': 'Interfaces intuitives qui améliorent la satisfaction des utilisateurs.',
+        'services-branding-title': 'Branding',
+        'services-branding': 'Identités mémorables qui résonnent avec votre public.',
+        'section-contact': 'Façonnons votre avenir',
+        'contact-text': 'Votre idée mérite de prendre forme. Contactez-nous aujourd’hui, et commençons à construire une expérience numérique qui laisse une impression durable.',
         'contact-name': 'Votre nom',
         'contact-email': 'Votre email',
         'contact-message': 'Votre message',
@@ -553,51 +1154,57 @@
       mouseY = -1000;
     });
     const particles = [];
-    const particleCount = 200;
-    const maxDistance = 100;
+    const particleCount = 250;
+    const maxDistance = 120;
     const minDistance = 20;
-    const mouseRadius = 200;
+    const mouseRadius = 250;
     for (let i = 0; i < particleCount; i++) {
       particles.push({
         x: Math.random() * width,
         y: Math.random() * height,
-        baseRadius: 1 + Math.random() * 2,
+        baseRadius: 1 + Math.random() * 3,
         twinkleOffset: Math.random() * Math.PI * 2,
-        shapePhase: Math.random() * Math.PI * 2
+        shapePhase: Math.random() * Math.PI * 2,
+        vx: (Math.random() - 0.5) * 0.5,
+        vy: (Math.random() - 0.5) * 0.5
       });
     }
     const shootingStars = [];
-    const maxShootingStars = 3;
+    const maxShootingStars = 5;
     function createShootingStar() {
       if (shootingStars.length < maxShootingStars) {
         const angle = Math.random() * Math.PI * 2;
-        const speed = 5 + Math.random() * 5;
+        const speed = 7 + Math.random() * 5;
         shootingStars.push({
           x: Math.random() * width,
           y: Math.random() * height,
           vx: Math.cos(angle) * speed,
           vy: Math.sin(angle) * speed,
-          lifespan: 1000,
+          lifespan: 1200,
           startTime: Date.now(),
-          radius: 1 + Math.random()
+          radius: 1 + Math.random() * 1.5
         });
       }
     }
-    setInterval(createShootingStar, 5000);
+    setInterval(createShootingStar, 4000);
     function animate() {
       ctx.clearRect(0, 0, width, height);
       particles.forEach(p => {
+        p.x += p.vx;
+        p.y += p.vy;
+        if (p.x < 0 || p.x > width) p.vx *= -1;
+        if (p.y < 0 || p.y > height) p.vy *= -1;
         const dx = mouseX - p.x;
         const dy = mouseY - p.y;
         const mouseDist = Math.sqrt(dx * dx + dy * dy);
         const mouseInfluence = mouseDist < mouseRadius ? (1 - mouseDist / mouseRadius) : 0;
-        const radius = p.baseRadius + mouseInfluence * 2;
-        let opacity = 0.5 + 0.5 * (Math.sin(Date.now() * 0.003 + p.twinkleOffset) + 1) / 2;
-        opacity = Math.min(1, opacity + mouseInfluence * 0.5);
+        const radius = p.baseRadius + mouseInfluence * 3;
+        let opacity = 0.6 + 0.4 * (Math.sin(Date.now() * 0.004 + p.twinkleOffset) + 1) / 2;
+        opacity = Math.min(1, opacity + mouseInfluence * 0.6);
         ctx.beginPath();
         const gradient = ctx.createRadialGradient(p.x, p.y, 0, p.x, p.y, radius * 2);
-        gradient.addColorStop(0, `rgba(255, 255, 255, ${opacity})`);
-        gradient.addColorStop(1, 'rgba(255, 255, 255, 0)');
+        gradient.addColorStop(0, `rgba(216, 180, 254, ${opacity})`);
+        gradient.addColorStop(1, 'rgba(216, 180, 254, 0)');
         ctx.arc(p.x, p.y, radius, 0, Math.PI * 2);
         ctx.fillStyle = gradient;
         ctx.fill();
@@ -605,7 +1212,7 @@
       if (mouseX >= 0 && mouseY >= 0) {
         ctx.beginPath();
         const glowGradient = ctx.createRadialGradient(mouseX, mouseY, 0, mouseX, mouseY, mouseRadius / 2);
-        glowGradient.addColorStop(0, 'rgba(168, 85, 247, 0.2)');
+        glowGradient.addColorStop(0, 'rgba(168, 85, 247, 0.3)');
         glowGradient.addColorStop(1, 'rgba(168, 85, 247, 0)');
         ctx.arc(mouseX, mouseY, mouseRadius / 2, 0, Math.PI * 2);
         ctx.fillStyle = glowGradient;
@@ -632,9 +1239,9 @@
       }
       connections.sort((a, b) => a.distance - b.distance);
       connections.forEach(({ p1, p2, distance, mouseInfluence }) => {
-        const shapeOpacity = 0.5 * (Math.sin(Date.now() * 0.001 + (p1.shapePhase + p2.shapePhase) / 2) + 1);
+        const shapeOpacity = 0.6 * (Math.sin(Date.now() * 0.002 + (p1.shapePhase + p2.shapePhase) / 2) + 1);
         const distanceOpacity = Math.max(0, 1 - (distance - minDistance) / (maxDistance - minDistance));
-        let lineOpacity = shapeOpacity * distanceOpacity * (0.8 + mouseInfluence * 0.6);
+        let lineOpacity = shapeOpacity * distanceOpacity * (0.9 + mouseInfluence * 0.7);
         const gradient = ctx.createLinearGradient(p1.x, p1.y, p2.x, p2.y);
         gradient.addColorStop(0, `rgba(30, 58, 138, ${lineOpacity})`);
         gradient.addColorStop(1, `rgba(168, 85, 247, ${lineOpacity})`);
@@ -642,7 +1249,7 @@
         ctx.moveTo(p1.x, p1.y);
         ctx.lineTo(p2.x, p2.y);
         ctx.strokeStyle = gradient;
-        ctx.lineWidth = 1.0;
+        ctx.lineWidth = 1.2;
         ctx.globalAlpha = lineOpacity;
         ctx.stroke();
         ctx.globalAlpha = 1;
@@ -654,17 +1261,17 @@
           shootingStars.splice(index, 1);
           return;
         }
-        const opacity = 0.5 + 0.5 * (1 - elapsed / s.lifespan);
+        const opacity = 0.6 + 0.4 * (1 - elapsed / s.lifespan);
         s.x += s.vx;
         s.y += s.vy;
         ctx.beginPath();
-        const trailGradient = ctx.createLinearGradient(s.x, s.y, s.x - s.vx * 2, s.y - s.vy * 2);
-        trailGradient.addColorStop(0, `rgba(255, 255, 255, ${opacity * 0.8})`);
-        trailGradient.addColorStop(1, 'rgba(255, 255, 255, 0)');
+        const trailGradient = ctx.createLinearGradient(s.x, s.y, s.x - s.vx * 3, s.y - s.vy * 3);
+        trailGradient.addColorStop(0, `rgba(216, 180, 254, ${opacity * 0.9})`);
+        trailGradient.addColorStop(1, 'rgba(216, 180, 254, 0)');
         ctx.moveTo(s.x, s.y);
-        ctx.lineTo(s.x - s.vx * 2, s.y - s.vy * 2);
+        ctx.lineTo(s.x - s.vx * 3, s.y - s.vy * 3);
         ctx.strokeStyle = trailGradient;
-        ctx.lineWidth = 1;
+        ctx.lineWidth = 1.5;
         ctx.stroke();
         ctx.beginPath();
         const gradient = ctx.createRadialGradient(s.x, s.y, 0, s.x, s.y, s.radius * 2);
@@ -677,6 +1284,20 @@
       requestAnimationFrame(animate);
     }
     animate();
+    const sections = document.querySelectorAll('section');
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+        }
+      });
+    }, { threshold: 0.1 });
+    sections.forEach(section => observer.observe(section));
+    const heroTitle = document.querySelector('.hero h1');
+    const letters = heroTitle.querySelectorAll('span');
+    letters.forEach((letter, index) => {
+      letter.style.animationDelay = `${index * 0.05}s`;
+    });
   </script>
 </body>
 </html>
