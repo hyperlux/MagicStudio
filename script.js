@@ -81,11 +81,17 @@ const translations = {
 function changeLanguage(lang) {
   document.querySelectorAll('[data-i18n]').forEach(element => {
     const key = element.getAttribute('data-i18n');
-    element.textContent = translations[lang][key];
+    console.log('Translating text content for key:', key, 'Element:', element); // Added log
+    if (translations[lang] && translations[lang][key]) {
+      element.textContent = translations[lang][key];
+    }
   });
   document.querySelectorAll('[data-i18n-placeholder]').forEach(element => {
     const key = element.getAttribute('data-i18n-placeholder');
-    element.placeholder = translations[lang][key];
+    console.log('Translating placeholder for key:', key, 'Element:', element); // Added log
+    if (translations[lang] && translations[lang][key]) {
+      element.placeholder = translations[lang][key];
+    }
   });
   document.documentElement.lang = lang;
   localStorage.setItem('language', lang);
@@ -93,34 +99,39 @@ function changeLanguage(lang) {
 const savedLang = localStorage.getItem('language') || 'en';
 document.getElementById('language-switcher').value = savedLang;
 changeLanguage(savedLang);
-document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-  anchor.addEventListener('click', function(e) {
-    e.preventDefault();
-    document.querySelector(this.getAttribute('href')).scrollIntoView({
-      behavior: 'smooth'
-    });
+// document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+//   anchor.addEventListener('click', function(e) {
+//     e.preventDefault();
+//     document.querySelector(this.getAttribute('href')).scrollIntoView({
+//       behavior: 'smooth'
+//     });
+//   });
+// });
+const contactButton = document.getElementById('contact-btn'); // Added variable
+console.log('Contact button element:', contactButton); // Added log
+if (contactButton) { // Added check
+  contactButton.addEventListener('click', () => {
+    const name = document.getElementById('name').value;
+    const email = document.getElementById('email').value;
+    const message = document.getElementById('message').value;
+    const lang = document.getElementById('language-switcher').value;
+    if (name && email && message) {
+      alert(translations[lang]['alert-success']);
+      document.getElementById('name').value = '';
+      document.getElementById('email').value = '';
+      document.getElementById('message').value = '';
+    } else {
+      alert(translations[lang]['alert-error']);
+    }
   });
-});
-document.getElementById('contact-btn').addEventListener('click', () => {
-  const name = document.getElementById('name').value;
-  const email = document.getElementById('email').value;
-  const message = document.getElementById('message').value;
-  const lang = document.getElementById('language-switcher').value;
-  if (name && email && message) {
-    alert(translations[lang]['alert-success']);
-    document.getElementById('name').value = '';
-    document.getElementById('email').value = '';
-    document.getElementById('message').value = '';
-  } else {
-    alert(translations[lang]['alert-error']);
-  }
-});
+}
 document.getElementById('mobile-menu-btn').addEventListener('click', () => {
   document.getElementById('mobile-menu').classList.toggle('active');
 });
 const sections = document.querySelectorAll('section, footer');
 const observer = new IntersectionObserver((entries) => {
   entries.forEach(entry => {
+console.log('Section intersected: Adding visible class to', entry.target.id);
     if (entry.isIntersecting) {
       entry.target.classList.add('visible');
     }

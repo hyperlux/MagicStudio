@@ -1,3 +1,8 @@
+html {
+  height: 100%;
+  overflow: auto;
+}
+
 body {
   font-family: 'Inter', sans-serif;
   font-weight: 200;
@@ -9,6 +14,7 @@ body {
   -webkit-scroll-snap-type: y mandatory;
   scroll-snap-type: y mandatory;
   background: #F8FAFC;
+  height: 100%; /* Ensure body also takes full height */
 }
 h1, h2, h3 {
   font-family: 'Playfair Display', serif;
@@ -17,7 +23,8 @@ h1, h2, h3 {
   letter-spacing: 0.02em;
 }
 section, footer {
-  min-height: 100vh; /* Use min-height to ensure full viewport height but allow content to expand */
+  height: 100vh; /* Use height to ensure full viewport height for scroll snapping */
+  overflow-y: auto; /* Add scrollbar to sections if content overflows */
   -webkit-scroll-snap-align: start;
   scroll-snap-align: start;
   position: relative;
