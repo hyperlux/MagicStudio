@@ -181,6 +181,10 @@ footer::before {
   .mobile-menu-btn {
     display: block;
   }
+  .hero::before {
+    background-position: top center;
+    background-size: auto 100%;
+  }
 }
 .language-switcher select {
   background: #F3F4F6;
