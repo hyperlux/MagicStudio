@@ -212,6 +212,11 @@ h2 {
 section.visible h2 {
   opacity: 1;
 }
+
+#about h2 {
+  font-size: 2.5rem; /* Adjusted font size for the specific title */
+  text-align: left; /* Align title to the left */
+}
 .hero {
   display: flex;
   flex-direction: column;
@@ -265,7 +270,7 @@ section.visible h2 {
   margin: 0 auto;
   display: flex;
   gap: 3rem;
-  align-items: center;
+  align-items: flex-start; /* Align content items to the left */
 }
 #about .content img {
   width: 120px;
