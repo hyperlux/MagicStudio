@@ -236,11 +236,12 @@ section.visible h2 {
 .hero a {
   background: #A855F7;
   color: #FFFFFF;
-  padding: 0.75rem 2rem;
+  padding: 0.75rem 1.5rem;
   border-radius: 9999px;
   font-weight: 600;
   font-size: 1rem;
   text-decoration: none;
+  align-self: center; /* Prevent button from stretching in flex container */
   opacity: 0;
   transition: opacity 1s ease 0.6s, background 0.3s ease;
 }
