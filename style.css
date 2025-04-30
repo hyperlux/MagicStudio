@@ -61,12 +61,17 @@ section.visible, footer.visible {
   justify-content: center; /* Center content vertically */
   height: 100%; /* Ensure content takes full height of the section */
 }
+
+#about .section-content {
+  padding-left: 50%; /* Shift content to the right */
+  max-width: 1280px; /* Keep max-width */
+}
 .section-content {
   padding: 2rem 1rem; /* Adjusted padding for smaller screens */
 }
 .hero::before {
   background-image: url('back5.png');
-  background-position: bottom; /* Align background image to the bottom */
+  background-position: center; /* Align background image to the center */
   background-size: cover;
   background-repeat: no-repeat;
 }
@@ -252,7 +257,7 @@ section.visible h2 {
   background: #D8B4FE;
 }
 #about .content {
-  max-width: 900px;
+  max-width: 900px; /* Adjust max-width to prevent text from being too wide */
   margin: 0 auto;
   display: flex;
   gap: 3rem;
@@ -269,8 +274,8 @@ section.visible h2 {
   opacity: 1;
 }
 #about .content p {
-  font-size: 1.125rem;
-  line-height: 1.6;
+  font-size: 1.3rem; /* Increased font size */
+  line-height: 1.8; /* Adjusted line height */
   margin: 0;
   opacity: 0;
   transition: opacity 1s ease 0.6s;
@@ -282,6 +287,9 @@ section.visible h2 {
   #about .content {
     flex-direction: column;
     text-align: center;
+  }
+  #about .section-content {
+    padding-left: 2rem; /* Reset padding for smaller screens */
   }
 }
 #portfolio .portfolio-grid {
