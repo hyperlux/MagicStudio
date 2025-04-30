@@ -266,11 +266,12 @@ section.visible h2 {
   background: #D8B4FE;
 }
 #about .content {
-  max-width: 900px; /* Adjust max-width to prevent text from being too wide */
-  margin: 0 auto;
+  max-width: 600px; /* Adjust max-width to prevent text from being too wide */
+  /* margin: 0 auto; */
   display: flex;
   gap: 3rem;
   align-items: center; /* Align content items to the left */
+  text-align: left;
 }
 #about .content img {
   width: 120px;
