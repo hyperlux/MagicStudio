@@ -203,7 +203,7 @@ footer::before {
   outline: none;
 }
 h2 {
-  font-size: 3rem;
+  font-size: 4rem;
   text-align: center;
   margin-bottom: 2rem;
   opacity: 0;
@@ -211,6 +211,10 @@ h2 {
 }
 section.visible h2 {
   opacity: 1;
+}
+
+#portfolio h2 {
+  font-size: 4rem;
 }
 
 #about h2 {
@@ -470,9 +474,12 @@ footer a:hover {
     font-size: 4rem;
   }
   h2 {
-    font-size: 2.5rem;
+    font-size: 3rem;
    }
-   section {
+   #portfolio h2 {
+     font-size: 3.5rem;
+   }
+    section {
      padding: 6rem 1.5rem;
    }
  }
@@ -481,8 +488,11 @@ footer a:hover {
      font-size: 3rem;
    }
    h2 {
-     font-size: 2rem;
-   }
+     font-size: 2.5rem;
+    }
+    #portfolio h2 {
+      font-size: 2.5rem;
+    }
    .section-content {
      padding: 1.5rem 0.5rem; /* Further reduce padding on very small screens */
    }
