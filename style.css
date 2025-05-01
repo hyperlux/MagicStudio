@@ -79,8 +79,7 @@ section.visible, footer.visible {
   background-image: url('back7.png');
 }
 #portfolio::before {
-  background-image: url('portfolio-background.jpg');
-  background: rgba(255, 255, 255, 0.9); /* Add back the overlay */
+  background-image: url('space.png');
 }
 #services::before {
   background-image: url('services-background.jpg');
