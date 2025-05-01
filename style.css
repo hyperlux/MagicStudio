@@ -362,6 +362,7 @@ section.visible h2 {
   box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
   flex-basis: 60%; /* Set image container width */
   flex-shrink: 0; /* Prevent shrinking */
+  margin-left: auto; /* Push the card to the right */
 }
 #portfolio.visible .portfolio-card {
   opacity: 1;
