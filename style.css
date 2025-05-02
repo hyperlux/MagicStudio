@@ -436,7 +436,7 @@ section.visible h2 {
   line-height: 1.6;
 }
 #contact .contact-form {
-  background: #FFFFFF;
+  background: transparent;
   border: 1px solid #E5E7EB;
   border-radius: 1rem;
   padding: 2.5rem;
@@ -450,7 +450,7 @@ section.visible h2 {
   opacity: 1;
 }
 .contact-form input, .contact-form textarea {
-  background: #F3F4F6;
+  background: transparent;
   border: 1px solid #D1D5DB;
   color: #0F172A;
   padding: 1rem;
