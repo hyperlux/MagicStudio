@@ -318,7 +318,7 @@ section.visible h2 {
 }
 #portfolio .portfolio-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(600px, 1fr)); /* Increase min width for the grid item */
+  grid-template-columns: repeat(auto-fit, minmax(800px, 1fr)); /* Increase min width for the grid item */
   gap: 2.5rem;
   justify-content: center;
 }
@@ -329,6 +329,11 @@ section.visible h2 {
   align-items: center; /* Vertically align items */
   opacity: 0;
   transition: opacity 1s ease;
+  background: transparent; /* Make background transparent */
+  border: 1px solid #E5E7EB; /* Add border */
+  border-radius: 1rem; /* Add border radius */
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1); /* Add box shadow */
+  padding: 2.5rem; /* Add padding */
 }
 
 #portfolio.visible .portfolio-item {
@@ -336,8 +341,11 @@ section.visible h2 {
 }
 
 .portfolio-text {
-  flex-basis: 40%; /* Set text container width */
+  flex: 1 1 40%; /* Allow growing and shrinking, base 40% */
   text-align: left; /* Align text to the left */
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 }
 
 .portfolio-text h3 {
@@ -369,8 +377,7 @@ section.visible h2 {
   background: #FFFFFF;
   border: 1px solid #E5E7EB;
   box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
-  flex-basis: 60%; /* Set image container width */
-  flex-shrink: 0; /* Prevent shrinking */
+  flex: 1 1 60%; /* Allow growing and shrinking, base 60% */
   margin-left: auto; /* Push the card to the right */
 }
 #portfolio.visible .portfolio-card {
@@ -411,7 +418,7 @@ section.visible h2 {
   border-radius: 1rem;
   padding: 2.5rem;
   box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1); /* Re-added box shadow */
-  min-height: 320px;
+  height: 280px;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -429,7 +436,7 @@ section.visible h2 {
 }
 .services-grid h3 {
   font-size: 1.5rem;
-  margin-bottom: 1rem;
+  margin-bottom: 0.5rem;
 }
 .services-grid p {
   font-size: 1.125rem;
