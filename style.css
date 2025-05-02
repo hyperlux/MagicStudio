@@ -22,7 +22,7 @@ h1, h2, h3 {
   color: #0F172A;
   letter-spacing: 0.02em;
 }
-section, footer {
+section {
   height: 100vh; /* Use height to ensure full viewport height for scroll snapping */
   /* overflow-y: auto; */ /* Removed scrollbar to sections if content overflows */
   -webkit-scroll-snap-align: start;
@@ -33,7 +33,7 @@ section, footer {
   transform: translateY(20px) scale(0.98);
   transition: opacity 1s ease, transform 1s ease;
 }
-section::before, footer::before {
+section::before {
   content: '';
   position: absolute;
   top: 0;
@@ -46,7 +46,7 @@ section::before, footer::before {
   z-index: -1;
   transition: background-image 1s ease;
 }
-section.visible, footer.visible {
+section.visible {
   opacity: 1;
   transform: translateY(0) scale(1);
 }
@@ -98,9 +98,9 @@ section.visible, footer.visible {
 #contact::before {
   background-image: url('back9.png');
 }
-footer::before {
-  background-image: url('footer-background.jpg');
-  background: rgba(255, 255, 255, 0.9); /* Add back the overlay */
+#contact .section-content {
+  justify-content: center; /* Center content vertically */
+  padding-top: 10rem; /* Add padding to move content down */
 }
 .header {
   position: fixed;
@@ -479,23 +479,33 @@ section.visible h2 {
 .contact-form button:hover {
   background: #9333EA;
 }
-footer {
-  padding: 4rem 2rem;
+.footer-content {
+  margin-top: 8rem; /* Add space above the footer content */
   text-align: center;
   color: #0F172A;
+  position: relative;
+  z-index: 1;
 }
-footer p {
-  margin-bottom: 1.5rem;
-  font-size: 1.125rem;
+
+.footer-content p {
+  margin-bottom: 0.5rem;
+  font-size: 1rem;
 }
-footer a {
+
+.footer-content div {
+  display: flex;
+  justify-content: center;
+  gap: 1rem; /* Reduced gap between links */
+}
+
+.footer-content a {
   color: #0F172A;
-  margin: 0 1.5rem;
   text-decoration: none;
-  font-size: 1.125rem;
+  font-size: 1rem;
   transition: color 0.3s ease;
 }
-footer a:hover {
+
+.footer-content a:hover {
   color: #A855F7;
 }
 @media (max-width: 768px) {
