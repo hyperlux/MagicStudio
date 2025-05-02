@@ -62,14 +62,18 @@ section.visible, footer.visible {
   height: 100%; /* Ensure content takes full height of the section */
 }
 
-#services .section-content {
-  background: rgba(255, 255, 255, 0.8); /* Add a semi-transparent white overlay */
-  padding: 2rem; /* Ensure padding is applied */
-  border-radius: 1rem; /* Optional: add rounded corners to the overlay */
+#services {
+  background-image: url('back9.png');
+  background-color: rgba(255, 255, 255, 0.5); /* Make semi-transparent white overlay more transparent */
+  background-size: cover; /* Ensure background covers the area */
+  background-position: center; /* Center the background image */
+  background-repeat: no-repeat; /* Prevent repeating */
 }
 
 #services .section-content {
-  z-index: 0; /* Lower z-index for services section content */
+  background: none; /* Remove background from content as it's on the section */
+  padding: 2rem; /* Ensure padding is applied */
+  border-radius: 1rem; /* Optional: add rounded corners to the overlay */
 }
 
 #about .section-content {
@@ -91,23 +95,8 @@ section.visible, footer.visible {
 #portfolio::before {
   background-image: url('back9.png');
 }
-#services::before {
-  content: ''; /* Ensure content is set */
-  display: block; /* Explicitly set display to block */
-  position: absolute; /* Ensure absolute positioning */
-  top: 0;
-  left: 0;
-  width: 100vw; /* Set width to 100% of viewport width */
-  height: 100vh; /* Set height to 100% of viewport height */
-  background-image: url('back9.png');
-  background-size: cover; /* Ensure background covers the area */
-  background-position: center; /* Center the background image */
-  background-repeat: no-repeat; /* Prevent repeating */
-  z-index: -1; /* Ensure it's behind content */
-}
 #contact::before {
-  background-image: url('contact-background.jpg');
-  background: rgba(255, 255, 255, 0.9); /* Add back the overlay */
+  background-image: url('back9.png');
 }
 footer::before {
   background-image: url('footer-background.jpg');
