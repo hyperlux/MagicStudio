@@ -406,7 +406,7 @@ section.visible h2 {
   text-align: center;
 }
 .services-grid div {
-  background: #FFFFFF; /* Re-added solid background for readability */
+  background: transparent; /* Make the box containers transparent */
   border: 1px solid #E5E7EB;
   border-radius: 1rem;
   padding: 2.5rem;
