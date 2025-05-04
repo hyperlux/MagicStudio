@@ -102,7 +102,10 @@ section.visible {
 }
 
 #contact::before {
- -background-image: url('back9.png');
+  background-image: url('back9.png');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
 }
 
 #contact .section-content {
@@ -505,8 +508,19 @@ section.visible h2 {
   background: #9333EA;
 }
 
+footer { /* New rule for the footer element */
+  padding: 4rem 2rem 2rem; /* Add padding for spacing */
+  text-align: center; /* Center align content */
+  background-image: url('back9.png');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  position: relative; /* Ensure z-index works if needed later */
+  z-index: 1;
+}
+
 .footer-content {
-  margin-top: 8rem;
+  /* margin-top: 8rem; Removed margin */
   text-align: center;
   color: #0F172A;
   position: relative;
