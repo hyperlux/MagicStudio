@@ -1,4 +1,7 @@
 document.addEventListener('DOMContentLoaded', () => {
+  // Initialize EmailJS with your Public Key
+  emailjs.init('7TfbAWrTuPy4t9kwl'); // Your EmailJS Public Key
+
   const translations = {
     en: {
       "nav-home": "Home",
@@ -127,21 +130,32 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
-  // --- Contact Form ---
+  // --- Contact Form with EmailJS and reCAPTCHA ---
   if (contactButton && contactForm && nameInput && emailInput && messageInput) {
     contactButton.addEventListener('click', (e) => {
-      e.preventDefault(); // Prevent default form submission
+      e.preventDefault();
       const name = nameInput.value.trim();
       const email = emailInput.value.trim();
       const message = messageInput.value.trim();
-      const currentLang = localStorage.getItem('language') || 'en'; // Get lang from localStorage
+      const currentLang = localStorage.getItem('language') || 'en';
 
       if (name && email && message) {
-        alert(translations[currentLang]['alert-success']);
-        // Clear the form on success
-        nameInput.value = '';
-        emailInput.value = '';
-        messageInput.value = '';
+        const templateParams = {
+          name: name,
+          email: email,
+          message: message,
+        };
+
+        emailjs.send('service_lcughi1', 'template_jvob13g', templateParams)
+          .then(() => {
+            alert(translations[currentLang]['alert-success']);
+            nameInput.value = '';
+            emailInput.value = '';
+            messageInput.value = '';
+          }, (error) => {
+            alert('Failed to send message. Please try again later.');
+            console.error('EmailJS Error:', error);
+          });
       } else {
         alert(translations[currentLang]['alert-error']);
       }
