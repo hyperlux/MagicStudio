@@ -15,7 +15,7 @@
   <header class="header">
     <div class="container">
       <div class="logo">
-        <img src="testlogo.png" alt="Magic Studio Logo">
+        <img src="testlogo.png" alt="Magic Studio Logo" width="40" height="40" fetchpriority="high">
         <h1>Magic Studio</h1>
       </div>
       <div class="nav-container">
@@ -78,7 +78,6 @@
       </div>
     </div>
   </section>
-
   <section id="portfolio">
     <div class="section-content">
       <div class="portfolio-grid">
@@ -89,7 +88,7 @@
             <a href="https://carrerarallye.com" data-i18n="portfolio-link-1">View Project</a>
           </div>
           <div class="portfolio-card">
-            <img src="rallye.png" alt="Rallye Project">
+            <img src="rallye.png" alt="Rallye Project" width="600" height="400" loading="lazy">
           </div>
         </div>
       </div>
@@ -112,7 +111,6 @@
   </section>
 
   <script>
-    // Language switcher
     const translations = {
       en: {
         "nav-home": "Home",
@@ -130,24 +128,9 @@
         "portfolio-title-1": "Carrera Rallye",
         "portfolio-description-1": "We worked closely with Stéphane, the creator of Carrera Rallye - Expérience Porsche, to bring his idea to life through a user-friendly website. Through careful design and strategic development, we built a polished platform featuring striking visuals, a seamless registration system, and detailed event information—schedule, eligible vehicles, routes, and premium accommodations. This refined digital solution enhances engagement, drives participation, and captures the thrill of the rally experience.",
         "portfolio-link-1": "View Project",
-        "portfolio-title-2": "Project Title 2",
-        "portfolio-description-2": "A brief description of the project.",
-        "portfolio-link-2": "View Project",
-        "portfolio-title-3": "Project Title 3",
-        "portfolio-description-3": "A brief description of the project.",
-        "portfolio-link-3": "View Project",
-        "portfolio-title-4": "Project Title 4",
-        "portfolio-description-4": "A brief description of the project.",
-        "portfolio-link-4": "View Project",
-        "portfolio-title-5": "Project Title 5",
-        "portfolio-description-5": "A brief description of the project.",
-        "portfolio-link-5": "View Project",
-        "portfolio-title-6": "Project Title 6",
-        "portfolio-description-6": "A brief description of the project.",
-        "portfolio-link-6": "View Project",
         "service-title-1": "Web Design & Development",
         "service-description-1": "Crafting visually stunning and highly functional websites tailored to your brand.",
-        "service-title-2": "User Experience & Interface",
+        "service-title-2": "UX/UI Design",
         "service-description-2": "Creating intuitive and engaging user experiences that keep visitors coming back.",
         "service-title-3": "Branding & Identity",
         "service-description-3": "Developing a strong and memorable brand identity that resonates with your target audience.",
@@ -157,8 +140,8 @@
         "contact-message": "Your Message",
         "contact-button": "Send Message",
         "footer-text": "© 2023 Magic Studio. All rights reserved.",
-        "footer-privacy": "Privacy Policy",
-        "footer-terms": "Terms of Service"
+        "alert-success": "Thank you for your message! We’ll get back to you soon.",
+        "alert-error": "Please fill out all fields."
       },
       fr: {
         "nav-home": "Accueil",
@@ -176,21 +159,6 @@
         "portfolio-title-1": "Carrera Rallye",
         "portfolio-description-1": "Nous avons travaillé en étroite collaboration avec Stéphane, le créateur de Carrera Rallye - Expérience Porsche, pour donner vie à son idée grâce à un site web convivial. Grâce à une conception soignée et un développement stratégique, nous avons construit une plateforme polie présentant des visuels saisissants, un système d'inscription fluide et des informations détaillées sur l'événement - calendrier, véhicules éligibles, itinéraires et hébergements haut de gamme. Cette solution numérique raffinée améliore l'engagement, stimule la participation et capture le frisson de l'expérience du rallye.",
         "portfolio-link-1": "Voir le Projet",
-        "portfolio-title-2": "Titre du Projet 2",
-        "portfolio-description-2": "Une brève description du projet.",
-        "portfolio-link-2": "Voir le Projet",
-        "portfolio-title-3": "Titre du Projet 3",
-        "portfolio-description-3": "Une brève description du projet.",
-        "portfolio-link-3": "Voir le Projet",
-        "portfolio-title-4": "Titre du Projet 4",
-        "portfolio-description-4": "Une brève description du projet.",
-        "portfolio-link-4": "Voir le Projet",
-        "portfolio-title-5": "Titre du Projet 5",
-        "portfolio-description-5": "Une brève description du projet.",
-        "portfolio-link-5": "Voir le Projet",
-        "portfolio-title-6": "Titre du Projet 6",
-        "portfolio-description-6": "Une brève description du projet.",
-        "portfolio-link-6": "Voir le Projet",
         "service-title-1": "Conception et Développement Web",
         "service-description-1": "Création de sites web visuellement époustouflants et très fonctionnels adaptés à votre marque.",
         "service-title-2": "Conception UX/UI",
@@ -203,8 +171,8 @@
         "contact-message": "Votre Message",
         "contact-button": "Envoyer le Message",
         "footer-text": "© 2023 Magic Studio. Tous droits réservés.",
-        "footer-privacy": "Politique de Confidentialité",
-        "footer-terms": "Conditions d'Utilisation"
+        "alert-success": "Merci pour votre message ! Nous vous répondrons bientôt.",
+        "alert-error": "Veuillez remplir tous les champs."
       }
     };
 
@@ -223,27 +191,26 @@
     function changeLanguage(lang) {
       document.querySelectorAll('[data-i18n]').forEach(element => {
         const key = element.getAttribute('data-i18n');
-        if (key.startsWith('[placeholder]')) {
-          const placeholderKey = key.replace('[placeholder]', '');
-          if (translations[lang] && translations[lang][placeholderKey]) {
-            element.placeholder = translations[lang][placeholderKey];
-          }
-        } else {
-          if (translations[lang] && translations[lang][key]) {
-            element.textContent = translations[lang][key];
-          }
+        if (translations[lang] && translations[lang][key]) {
+          element.textContent = translations[lang][key];
         }
       });
+      document.querySelectorAll('[data-i18n-placeholder]').forEach(element => {
+        const key = element.getAttribute('data-i18n-placeholder');
+        if (translations[lang] && translations[lang][key]) {
+          element.placeholder = translations[lang][key];
+        }
+      });
+      document.documentElement.lang = lang;
+      localStorage.setItem('language', lang);
       updateLanguageLink(lang);
     }
 
-    // Set default language on load
     document.addEventListener('DOMContentLoaded', () => {
-      changeLanguage('en');
+      const savedLang = localStorage.getItem('language') || 'en';
+      changeLanguage(savedLang);
     });
-    
 
-    // Mobile menu toggle
     const mobileMenuBtn = document.getElementById('mobile-menu-btn');
     const mobileMenu = document.getElementById('mobile-menu');
 
@@ -251,31 +218,42 @@
       mobileMenu.classList.toggle('active');
     });
 
-    // Close mobile menu when a link is clicked
     mobileMenu.querySelectorAll('a').forEach(link => {
       link.addEventListener('click', () => {
         mobileMenu.classList.remove('active');
       });
     });
 
-    // Intersection Observer for section visibility
-    const sections = document.querySelectorAll('section, footer');
+    const contactButton = document.getElementById('contact-btn');
+    if (contactButton) {
+      contactButton.addEventListener('click', (e) => {
+        e.preventDefault();
+        const name = document.getElementById('name').value;
+        const email = document.getElementById('email').value;
+        const message = document.getElementById('message').value;
+        const lang = localStorage.getItem('language') || 'en';
+        if (name && email && message) {
+          alert(translations[lang]['alert-success']);
+          document.getElementById('name').value = '';
+          document.getElementById('email').value = '';
+          document.getElementById('message').value = '';
+        } else {
+          alert(translations[lang]['alert-error']);
+        }
+      });
+    }
 
+    const sections = document.querySelectorAll('section, footer');
     const observerOptions = {
-      root: null, // Use the viewport as the root
+      root: null,
       rootMargin: '0px',
-      threshold: 0.1 // Trigger when 10% of the section is visible
+      threshold: 0.1
     };
 
     const observer = new IntersectionObserver((entries, observer) => {
       entries.forEach(entry => {
         if (entry.isIntersecting) {
           entry.target.classList.add('visible');
-          // Optionally, unobserve the target after it becomes visible
-          // observer.unobserve(entry.target);
-        } else {
-          // Optional: remove 'visible' class when section is out of view
-          // entry.target.classList.remove('visible');
         }
       });
     }, observerOptions);
