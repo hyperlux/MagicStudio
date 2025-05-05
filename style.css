@@ -435,10 +435,8 @@ section.visible h2 {
   border-radius: 1rem;
   padding: 2.5rem;
   box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
-  height: 280px;
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
   opacity: 0;
   transition: opacity 1s ease;
 }
@@ -450,6 +448,7 @@ section.visible h2 {
 .services-grid h3 {
   font-size: 1.5rem;
   margin-bottom: 0.5rem;
+  white-space: normal;
 }
 
 .services-grid p {
@@ -580,4 +579,11 @@ footer { /* New rule for the footer element */
   .header .container {
     padding: 0 0.5rem;
   }
+}
+
+.services-grid div .service-icon {
+  display: block; /* Ensure the image is on its own line */
+  font-size: 3rem; /* Adjust size as needed */
+  color: #A855F7; /* Example color, adjust as needed */
+  margin: 0 auto 1rem; /* Center the icon and add space below */
 }
